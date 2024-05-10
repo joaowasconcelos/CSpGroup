@@ -1,0 +1,60 @@
+Pessoa       ok
+	Id
+	Nome
+	Sobrenome
+	Idade
+	C.P.F char
+	C.R.M. 
+	Categoria
+	
+Endereço         ok
+	id
+	id_pessoa
+	Rua
+	bairro
+	numero
+	cep char
+	cidade
+	estado
+	
+Email             ok
+	id
+	id_pessoa
+	endereço de email
+
+Telefone            ok
+	id	
+	id_pessoa
+	telefone char
+	celular char
+
+Especialidade	         ok
+	id													
+	id_pessoa
+	especialidade
+	
+Agendamento            ok
+	Id
+	Id especialidade
+	Id pessoa
+	Id prontuario
+	horario
+	data
+
+Pronturario          ok
+	id
+	id pessoa
+	id especialidade
+	observações
+	tratamentos e prescrição / sim-nao-qual
+	sintomas
+	historico familiar
+	
+login               ok
+	id
+	id_pessoa
+	email
+	senha
+	
+	
+		
