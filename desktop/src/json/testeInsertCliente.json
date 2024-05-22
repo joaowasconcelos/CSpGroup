@@ -1,0 +1,31 @@
+{
+    "cpf": "49914181864",
+    "nome": "joao",
+    "data_nasc": "15/09/2004",
+    "genero": "M",
+    "email": "joaowasconcelos18@gamil.com",
+    "endereco": [
+        {
+            "logradouro": "Rua: dos corre",
+            "bairro": "Portal Bordon",
+            "estado": "SP",
+            "numero": "157",
+            "complemento": "Perto da boca",
+            "cep": "13173-418"
+        }
+    ],
+    "telefone": [
+        {
+            "numeroTel": "19995730994"
+        },
+        {
+            "numeroTel": "19888745525"
+        }
+    ],
+    "funcionario": [
+        {
+            "data_admissao":"18/10/1981",
+            "crm":"1879258"
+        }
+    ]
+}
