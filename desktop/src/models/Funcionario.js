@@ -13,6 +13,14 @@ class Funcionario extends Pessoa {
 
     get Especialidades() { return this.especialidades; }
     set Especialidades(sEspecialidades) { this.especialidades = sEspecialidades; }
+
+    validaCampos() {
+        return (
+            this.DataAdmissao &&
+            this.CRM &&
+            this.Especialidades
+        )
+    }
 }
 
 module.exports = Funcionario;
