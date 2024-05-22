@@ -5,10 +5,15 @@ class Telefone{
     }
 
     get Id() { return this.id; }
-    set Id(sId) { this.id = sId; }
 
     get NumeroTelefone() { return this.numeroTelefone; }
     set NumeroTelefone(sNumeroTelefone) { this.numeroTelefone = sNumeroTelefone; }
+
+    validaCampos(){
+        return(
+            this.NumeroTelefone
+        )
+    }
 }
 
 module.exports = Telefone;
