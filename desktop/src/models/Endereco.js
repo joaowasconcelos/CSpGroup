@@ -9,7 +9,6 @@ class Endereco {
         this.cep = pCep;
     }
     get Id() { return this.id; }
-    set Id(sId) { this.id = sId; }
 
     get Logradouro() { return this.logradouro; }
     set Logradouro(sLogradouro) { this.logradouro = sLogradouro; }
@@ -28,6 +27,16 @@ class Endereco {
 
     get Cep() { return this.cep; }
     set Cep(sCep) { this.cep = sCep; }
+
+    validaCampos(){
+        return(
+            this.logradouro&&
+            this.bairro&&
+            this.estado&&
+            this.numeroEndereco&&
+            this.cep
+        )
+    }
 }
 
 module.exports = Endereco;

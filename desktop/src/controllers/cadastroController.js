@@ -9,8 +9,8 @@ const cadastro = {
         try {
             const { cpf, nome, data_nasc, genero, email, endereco: [logradouro, bairro, estado, numero, complemento, cep], telefone, funcionario: [data_admissao, crm] } = req.body;
 
-            const novaPessoa = new Pessoa = (null,cpf, nome, data_nasc, genero, email );
-            const novoEndereco = new Endereco = (logradouro, bairro, estado, numero, complemento, cep);
+            const novaPessoa = new Pessoa(null,cpf, nome, data_nasc, genero, email );
+            const novoEndereco = new Endereco(logradouro, bairro, estado, numero, complemento, cep);
 
             const objTelefone = []
 
@@ -23,19 +23,17 @@ const cadastro = {
             let novoFuncionario = null;
             let result = null
 
-            if (Pessoa.validaCampos()) {
+            if (novaPessoa.validaCampos() && novoEndereco.validaCampos() && objTelefone.validaCampos()&& novoFuncionario.validaCampos()) {
                 return res.json({ message: 'Todos os campos são obrigatórios.' });
             }
-
             if (data_admissao == null) {                
                 result = await insert(novaPessoa, novoEndereco, objTelefone, null);
+                console.log(result)
             }else{
-                novoFuncionario = new Funcionario = (data_admissao, crm);
+                novoFuncionario = new Funcionario(data_admissao, crm);
                 result = await insert(novaPessoa, novoEndereco, objTelefone, novoFuncionario);
+                console.log(result)
             }
-            
-            
-
             return res.json(result);
 
         } catch (error) {
