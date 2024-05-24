@@ -9,9 +9,15 @@ class Telefone{
     get NumeroTelefone() { return this.numeroTelefone; }
     set NumeroTelefone(sNumeroTelefone) { this.numeroTelefone = sNumeroTelefone; }
 
+    
+    validaCampos(){
+        return(
+            this.numeroTelefone
+
     validaCampos(){
         return(
             this.NumeroTelefone
+
         )
     }
 }

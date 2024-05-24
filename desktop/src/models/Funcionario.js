@@ -1,5 +1,5 @@
 class Funcionario extends Pessoa {
-    constructor(pId, pCpf, pNome, pDataNasc, pGenero, pEmail, pLogradouro, pBairro, pEstado, pNumeroEndereco, pComplementoEndereco, pCep, pNumeroTelefone, pDataAdmissao, pCRM, pEspecialidade) {
+    constructor(pId, pCpf, pNome, pDataNasc, pGenero, pEmail, pLogradouro, pBairro, pEstado, pNumeroEndereco, pComplementoEndereco, pCep, pNumeroTelefone, pDataAdmissao, pCRM) {
         super(pId, pCpf, pNome, pDataNasc, pGenero, pEmail, pLogradouro, pBairro, pEstado, pNumeroEndereco, pComplementoEndereco, pCep, pNumeroTelefone);
         this.dataAdmissao = pDataAdmissao;
         this.crm = pCRM;
@@ -10,6 +10,11 @@ class Funcionario extends Pessoa {
 
     get CRM() { return this.crm; }
     set CRM(sCRM) { this.crm = sCRM; }
+
+    validaCampos(){
+        return(
+            this.dataAdmissao&&
+            this.crm
 
     get Especialidades() { return this.especialidades; }
     set Especialidades(sEspecialidades) { this.especialidades = sEspecialidades; }
