@@ -17,6 +17,15 @@ class Funcionario extends Pessoa {
         return(
             this.dataAdmissao&&
             this.crm
+
+    get Especialidades() { return this.especialidades; }
+    set Especialidades(sEspecialidades) { this.especialidades = sEspecialidades; }
+
+    validaCampos() {
+        return (
+            this.DataAdmissao &&
+            this.CRM &&
+            this.Especialidades
         )
     }
 }
