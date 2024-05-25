@@ -23,9 +23,10 @@ const cadastro = {
             let novoFuncionario = null;
             let result = null
 
-            if (novaPessoa.validaCampos() && novoEndereco.validaCampos() && objTelefone.validaCampos()&& novoFuncionario.validaCampos()) {
+            if (!novaPessoa.validaCampos() || !novoEndereco.validaCampos() || !objTelefone.validaCampos() || !novoFuncionario.validaCampos()) {
                 return res.json({ message: 'Todos os campos são obrigatórios.' });
             }
+            
             if (data_admissao == null) {                
                 result = await insert(novaPessoa, novoEndereco, objTelefone, null);
                 console.log(result)
