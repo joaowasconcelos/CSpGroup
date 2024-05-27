@@ -1,24 +1,24 @@
-class Telefone{
-    constructor(pId,pNumeroTelefone ){
-        this.id = pId
-        this.numeroTelefone = pNumeroTelefone;
+class Telefone {
+    constructor(pId, pNumeroTelefone) {
+        this.id = pId;
+        this.numeroTelefone = pNumeroTelefone || [];
     }
 
     get Id() { return this.id; }
 
-    get NumeroTelefone() { return this.numeroTelefone; }
-    set NumeroTelefone(sNumeroTelefone) { this.numeroTelefone = sNumeroTelefone; }
+    get NumerosTelefone() { return this.numeroTelefone; }
+    set NumerosTelefone(sNumeroTelefone) { this.numeroTelefone = sNumeroTelefone; }
 
-    
-    validaCampos(){
-        return(
-            this.numeroTelefone
+    adicionarNumeroTelefone(numeroTelefone) {
+        this.numerosTelefone.push(numeroTelefone);
+    }
 
-    validaCampos(){
-        return(
-            this.NumeroTelefone
+    removerNumeroTelefone(numeroTelefone) {
+        this.numerosTelefone = this.numerosTelefone.filter(tel => tel !== numeroTelefone);
+    }
 
-        )
+    validaCampos() {
+        return this.numeroTelefone.length > 0;
     }
 }
 

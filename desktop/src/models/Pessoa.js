@@ -1,12 +1,11 @@
 class Pessoa {
-    constructor(pId, pCpf, pNome, pDataNasc, pGenero, pEmail,pData_cad) {
+    constructor(pId, pCpf, pNome, pDataNasc, pGenero, pEmail) {
         this.id = pId
         this.cpf = pCpf;
         this.nome = pNome;
         this.dataNasc = pDataNasc;
         this.genero = pGenero;
         this.email = pEmail;
-        this.dataCad = pData_cad;
     }
 
     get Id() { return this.id; }
@@ -26,8 +25,12 @@ class Pessoa {
     get Email() { return this.email }
     set Email(sEmail) { this.email = sEmail; }
 
-    get DataCad() { return this.dataCad }
-  
+
+    DataConvert(value) {
+        let [dia, mes, ano] = value.split('/'); 
+        let dataFormatada = `${ano}-${mes}-${dia}`;
+        this.dataNasc = dataFormatada;
+    }
 
     validaCampos(){
         return(
@@ -35,8 +38,7 @@ class Pessoa {
             this.nome&&
             this.dataNasc&&
             this.genero&&
-            this.email&&
-            this.DataCad
+            this.email
         )
     }
 }
