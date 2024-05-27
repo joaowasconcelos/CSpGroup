@@ -1,29 +1,33 @@
+const Pessoa = require("../models/Pessoa");
+
 class Funcionario extends Pessoa {
-    constructor(pId, pCpf, pNome, pDataNasc, pGenero, pEmail, pLogradouro, pBairro, pEstado, pNumeroEndereco, pComplementoEndereco, pCep, pNumeroTelefone, pDataAdmissao, pCRM) {
-        super(pId, pCpf, pNome, pDataNasc, pGenero, pEmail, pLogradouro, pBairro, pEstado, pNumeroEndereco, pComplementoEndereco, pCep, pNumeroTelefone);
-        this.dataAdmissao = pDataAdmissao;
-        this.crm = pCRM;
+    constructor(pId, pCpf, pNome, pDataNasc, pGenero, pEmail, pDataAdmissao, pCrm) {
+        super(pId, pCpf, pNome, pDataNasc, pGenero, pEmail);
+        this.crm = pCrm;
+
+        if (pDataAdmissao === null) {
+            this.dataAdmissao = pDataAdmissao;
+        } else {
+            this.dataAdmissao = this.DataConvert(pDataAdmissao);
+        }
     }
 
     get DataAdmissao() { return this.dataAdmissao; }
     set DataAdmissao(sDataAdmissao) { this.dataAdmissao = sDataAdmissao; }
 
-    get CRM() { return this.crm; }
-    set CRM(sCRM) { this.crm = sCRM; }
+    get Crm() { return this.crm; }
+    set Crm(sCRM) { this.crm = sCRM; }
 
-    validaCampos(){
-        return(
-            this.dataAdmissao&&
-            this.crm
-
-    get Especialidades() { return this.especialidades; }
-    set Especialidades(sEspecialidades) { this.especialidades = sEspecialidades; }
+    DataConvert(value) {
+        let [dia, mes, ano] = value.split('/');
+        let dataFormatada = `${ano}-${mes}-${dia}`;
+        return dataFormatada; // Retornar a data formatada
+    }
 
     validaCampos() {
         return (
             this.DataAdmissao &&
-            this.CRM &&
-            this.Especialidades
+            this.crm
         )
     }
 }
