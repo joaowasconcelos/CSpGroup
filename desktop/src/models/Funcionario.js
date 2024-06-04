@@ -19,15 +19,16 @@ class Funcionario extends Pessoa {
     set Crm(sCRM) { this.crm = sCRM; }
 
     DataConvert(value) {
-        let [dia, mes, ano] = value.split('/');
-        let dataFormatada = `${ano}-${mes}-${dia}`;
-        return dataFormatada; // Retornar a data formatada
+        if(value != null){
+            let [dia, mes, ano] = value.split('/');
+            let dataFormatada = `${ano}-${mes}-${dia}`;
+            return dataFormatada;
+        }
+    
     }
-
     validaCampos() {
         return (
-            this.DataAdmissao &&
-            this.crm
+            this.DataAdmissao 
         )
     }
 }

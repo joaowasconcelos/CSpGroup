@@ -7,9 +7,9 @@ const connection = async () => {
     const con = await mysql2.createConnection({
         host: 'localhost',
         port: '3306',
-        database: 'db_clinica',
+        database: 'clinica',
         user: 'root',
-        password: '12345',
+        password: '1234',
         multipleStatements:true 
     });
     console.log("Conectou no MySQL!");

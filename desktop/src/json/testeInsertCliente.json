@@ -1,7 +1,7 @@
 {
     "cpf": "49914181864",
     "nome": "joao",
-    "data_nasc": "15/09/2004",
+    "dataNasc": "15/09/2004",
     "genero": "M",
     "email": "joaowasconcelos18@gamil.com",
     "endereco": [
@@ -16,16 +16,13 @@
     ],
     "telefone": [
         {
-            "numeroTel": "19995730994"
-        },
-        {
-            "numeroTel": "19888745525"
+            "numeroTelefone": "19995730994"
         }
     ],
     "funcionario": [
         {
-            "data_admissao":"18/10/1981",
-            "crm":"1879258"
+            "dataAdmissao":"null",
+            "crm":"null"
         }
     ]
 }

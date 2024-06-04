@@ -9,16 +9,8 @@ class Telefone {
     get NumerosTelefone() { return this.numeroTelefone; }
     set NumerosTelefone(sNumeroTelefone) { this.numeroTelefone = sNumeroTelefone; }
 
-    adicionarNumeroTelefone(numeroTelefone) {
-        this.numerosTelefone.push(numeroTelefone);
-    }
-
-    removerNumeroTelefone(numeroTelefone) {
-        this.numerosTelefone = this.numerosTelefone.filter(tel => tel !== numeroTelefone);
-    }
-
     validaCampos() {
-        return this.numeroTelefone.length > 0;
+        return this.numeroTelefone;
     }
 }
 
