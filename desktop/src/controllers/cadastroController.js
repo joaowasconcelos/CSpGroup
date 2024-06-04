@@ -9,7 +9,9 @@ const cadastro = {
         try {
             const { cpf, nome, dataNasc, genero, email, endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }], telefone, funcionario: [{ dataAdmissao, crm }] } = req.body;
             const novaPessoa = new Pessoa(null, cpf, nome, dataNasc, genero, email);
+            novaPessoa.validarCPF(cpf)
             novaPessoa.DataConvert(dataNasc)
+            
             const novoEndereco = new Endereco(null, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep);
             //const objTelefone = telefone.map(tel => new Telefone(null, tel.numeroTelefone));
             
