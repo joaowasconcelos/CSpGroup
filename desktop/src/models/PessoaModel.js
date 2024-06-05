@@ -1,5 +1,14 @@
 const conectarBancoDeDados = require("../config/db")
 
+async function selectCPF(cpf) {
+    const bd = await conectarBancoDeDados();
+    try {
+        const selectCPF = await bd.query('SELECT * FROM tbl_pessoa WHERE CPF=?', [cpf]);
+        return selectCPF;
+    } catch (error) {
+        throw error;
+    }
+}
 async function insert(pessoa, endereco, telefones, pacienteFuncionario) {
     const bd = await conectarBancoDeDados();
     try {
@@ -10,7 +19,7 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario) {
             const resTel = await bd.query('INSERT INTO tbl_telefone (numero) VALUES (?)', [tel.numeroTelefone]);
             idtel.push(resTel[0].insertId);
         });
-        
+
         const enderecoResult = await bd.query('INSERT INTO tbl_endereco (logradouro, bairro, estado, numero, complemento, cep) VALUES (?, ?, ?, ?, ?, ?)',
             [endereco.logradouro, endereco.bairro, endereco.estado, endereco.numeroEndereco, endereco.complementoEndereco, endereco.cep]);
         const enderecoId = enderecoResult[0].insertId;
@@ -46,4 +55,4 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario) {
     }
 }
 
-module.exports = { insert };
+module.exports = { insert, selectCPF };
