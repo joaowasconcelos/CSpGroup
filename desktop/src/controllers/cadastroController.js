@@ -22,7 +22,11 @@ const cadastro = {
 
             if (telefone.length > 0) {
                 telefone.forEach(tel => {
+                    console.log(tel)
                     const novoTelefone = new Telefone(null, tel.numeroTelefone);
+                    if (!novoTelefone.telefone_validation(novoTelefone.numeroTelefone)) {
+                        return res.json({ message: 'Numeros de Telefone invalido!' })
+                    };
                     objTelefone.push(novoTelefone);
                 });
             }
@@ -32,6 +36,12 @@ const cadastro = {
 
             if (!novaPessoa.validaCampos() || !novoEndereco.validaCampos()) {
                 return res.json({ message: 'Todos os campos são obrigatórios.' });
+            }
+
+            const ValidaCPF = novaPessoa.selectCPF(cpf)
+            console.log(ValidaCPF);
+            if (ValidaCPF.length > 0) {
+                return res.json({ message: 'CPF ja cadastrado!' })
             }
 
             if (dataAdmissao === null || dataAdmissao === undefined) {
