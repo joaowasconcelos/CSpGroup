@@ -8,7 +8,9 @@ npm i react-native-safe-area-context @react-navigation/native-stack @react-navig
 npm install @react-navigation/bottom-tabs
 npm install @mindinventory/react-native-tab-bar-interaction
 react-native-vector-icons/FontAwesome
-
+npm i mdb-react-ui-kit
+npm i @fortawesome/fontawesome-free
+npx expo install expo-linear-gradient
 ---------------
 
 -> Telas necessárias
@@ -17,6 +19,9 @@ react-native-vector-icons/FontAwesome
 -dados cadastrais
 -entre em contato
 -menu
+
+
+telas do médico tambem serão necessarias
 
 ---------------
 
