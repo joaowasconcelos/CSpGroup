@@ -1,5 +1,14 @@
 const connection = require("../config/db");
 
+async function selectCPF(cpf) {
+    try {
+        const selectCPF = await connection.query('SELECT * FROM tbl_pessoa WHERE CPF=?', [cpf]);
+        return selectCPF;
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function insert(pessoa, endereco, telefones, pacienteFuncionario) {
     const bd = await connection();
     try {
@@ -48,7 +57,7 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario) {
 
 
         await bd.query('INSERT INTO tbl_paciente (pessoa_id) VALUES (?)', [pessoaId]);
-       
+
 
         if (pacienteFuncionario !== null) {
             const { dataAdmissao, crm } = pacienteFuncionario;
@@ -68,4 +77,4 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario) {
     }
 }
 
-module.exports = { insert };
+module.exports = { insert, selectCPF };
