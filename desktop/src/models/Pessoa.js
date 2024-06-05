@@ -27,17 +27,18 @@ class Pessoa {
 
 
     DataConvert(value) {
-        let [dia, mes, ano] = value.split('/'); 
+        let [dia, mes, ano] = value.split('/');
         let dataFormatada = `${ano}-${mes}-${dia}`;
-        this.dataNasc = dataFormatada;
+        this.dataNasc = new Date(dataFormatada);
+        return this.DataNasc
     }
 
-    validaCampos(){
-        return(
-            this.cpf&&
-            this.nome&&
-            this.dataNasc&&
-            this.genero&&
+    validaCampos() {
+        return (
+            this.cpf &&
+            this.nome &&
+            this.dataNasc &&
+            this.genero &&
             this.email
         )
     }
