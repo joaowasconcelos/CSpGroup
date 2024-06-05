@@ -8,16 +8,20 @@ const cadastro = {
     adicionaPessoa: async (req, res) => {
         try {
             const { cpf, nome, dataNasc, genero, email, endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }], telefone, funcionario: [{ dataAdmissao, crm }] } = req.body;
-            const novaPessoa = new Pessoa(null, cpf, nome, dataNasc, genero, email)
-            novaPessoa.DataConvert(dataNasc)
+            const novaPessoa = new Pessoa(null, cpf, nome, dataNasc, genero, email);
+            const dataVal = novaPessoa.DataConvert(novaPessoa.dataNasc);
+            console.log(dataVal)
+            console.log(new Date(novaPessoa.dataNasc)instanceof Date);
+            if(dataVal == "Invalid Date" || !(new Date(novaPessoa.dataNasc)instanceof Date) ){
+                console.log(novaPessoa.dataNasc instanceof Date)
+                return res.json({ message: "Data informada é invalida"});
+            }
             const novoEndereco = new Endereco(null, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep);
-            console.log(novoEndereco)
 
             const objTelefone = [];
 
             if (telefone.length > 0) {
                 telefone.forEach(tel => {
-                    console.log(tel)
                     const novoTelefone = new Telefone(null, tel.numeroTelefone);
                     objTelefone.push(novoTelefone);
                 });
@@ -26,17 +30,18 @@ const cadastro = {
             let novoFuncionario = null;
             let result = null;
 
-            // if (!novaPessoa.validaCampos()|| !novoEndereco.validaCampos() || !novoFuncionario) {
-            //     return res.json({ message: 'Todos os campos são obrigatórios.' });
-            // }
+            if (!novaPessoa.validaCampos() || !novoEndereco.validaCampos()) {
+                return res.json({ message: 'Todos os campos são obrigatórios.' });
+            }
+
             if (dataAdmissao === null || dataAdmissao === undefined) {
                 result = await insert(novaPessoa, novoEndereco, objTelefone, null);
-                return res.status(404).json({ message: "Paciente cadastrado com sucesso" });
+                return res.json({ message: "Paciente cadastrado com sucesso" });
             } else {
                 novoFuncionario = new Funcionario(null, cpf, nome, dataNasc, genero, email, dataAdmissao, crm);
                 novoFuncionario.DataConvert(dataAdmissao)
                 result = await insert(novaPessoa, novoEndereco, objTelefone, novoFuncionario);
-                return res.status(404).json({ message: "Funcionario cadastrado com sucesso" });
+                return res.json({ message: "Funcionario cadastrado com sucesso" });
             }
         } catch (error) {
             console.log(error)
