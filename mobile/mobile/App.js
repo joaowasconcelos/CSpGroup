@@ -26,21 +26,6 @@ function MainTabs() {
       }}
     >
       <Tab.Screen
-        name='Home'
-        component={Home}
-        options={{
-          title: 'Home',
-          headerTintColor: '#053c20',
-          headerStyle: {
-            backgroundColor: '#b4c4bc',
-          },
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name='home' color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name='Consultas'
         component={Consultas}
         options={{
@@ -70,6 +55,7 @@ function MainTabs() {
         }}
       />
     </Tab.Navigator>
+    
   );
 }
 
@@ -85,6 +71,17 @@ function LoginStack() {
         name="Main"
         component={MainTabs}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Dados"
+        component={Dados}
+        options={{
+          title: 'Dados',
+          headerTintColor: '#053c20',
+          headerStyle: {
+            backgroundColor: '#b4c4bc',
+          },
+        }}
       />
     </Stack.Navigator>
   );
