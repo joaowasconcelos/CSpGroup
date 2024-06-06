@@ -16,6 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 const logo = require('../../../assets/logo_medical.png');
 
 const Login = () => {
+    
     const navigation = useNavigation();
 
     const navegaLogin = () => {
@@ -26,49 +27,46 @@ const Login = () => {
     return (
 
         <SafeAreaView style={styles.androidSafeArea}>
+
             <ScrollView>
-                <LinearGradient
-                    // Background Linear Gradient
-                    colors={['rgb(0, 76, 76)', 'transparent']}
-                    style={styles.background}
-                />
+
+                <LinearGradient colors={['rgb(0, 76, 76)', 'transparent']} style={styles.background} />
 
                 <View style={styles.topo}>
+
                     <Text style={styles.title}>SP MEDICAL GROUP</Text>
                     <Image source={logo} />
+
                 </View>
 
                 <View style={styles.container}>
 
-                    <View style={{
-                        backgroundColor: 'white',
-                        height: 720,
-                        width: 460,
-                        borderTopLeftRadius: 130,
-                        paddingTop: 100,
-                        alignItems: 'center'
-                    }}>
+                    <View style={styles.box_white}>
+
                         <Text style={styles.subtitulo5}>Bem Vindo</Text>
-                        <Text style={styles.subtitulo4}>Faça login em sua conta </Text>
+                        <Text style={styles.subtitulo4}>Faça login em sua conta</Text>
 
                         <TextInput placeholder='Digite seu Email ou C.P.F.' style={styles.entradaTexto}></TextInput>
+                        <TextInput placeholder='Digite sua senha' secureTextEntry={true} style={styles.entradaTexto}></TextInput>
+
+                        <Text style={styles.subtitulo3}>Esqueceu a senha?</Text>
 
                         <Pressable
                             style={({ pressed }) => [
                                 {
                                     backgroundColor: pressed ? '#b2d8d8' : '#004c4c',
-                                    width: 140,
-                                    height: 40,
+                                    width: 350,
+                                    height: 50,
                                     justifyContent: 'center',
-                                    borderRadius: 10,
+                                    borderRadius: 50,
                                     alignItems: 'center',
-                                    marginTop: 10,
-                                    marginBottom: 10,
+                                    marginTop: 200,
+                                    marginBottom: 10
                                 },
                             ]}
                             onPress={navegaLogin}
                         >
-                            <Text style={{ textAlign: 'center', fontSize: 15, fontWeight: 'bold', color: '#fafafa' }}>Logar</Text>
+                            <Text style={{ textAlign: 'center', fontSize: 25, letterSpacing: 5, fontWeight: 'bold', color: '#fafafa' }}>Logar</Text>
                         </Pressable>
 
                     </View>
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 717,
+        height: 700,
         width: 460,
         //backgroundColor: '#f7f9f8',
     },
@@ -110,31 +108,53 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginVertical: 10,
+        marginTop: 25,
         textAlign: 'center'
     },
     topo: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10
     },
     subtitulo5: {
         fontSize: 50,
-        color: '#007c7c',
-        fontWeight: 'bold',
+        color: '#026161',
+        fontWeight: 'bold'
     },
     subtitulo4: {
         color: 'grey',
         fontSize: 19,
         fontWeight: 'bold',
-        marginBottom: 20,
-    }, 
+        marginBottom: 40,
+    },
+    subtitulo3: {
+        color: '#007c7c',
+        fontSize: 19,
+        fontWeight: 'bold',
+        marginLeft: 172
+    },
     entradaTexto: {
         borderRadius: 100,
         color: '#004c4c',
         paddingHorizontal: 10,
         borderRadius: 100,
-        width: 200,
-        backgroundColor: 'rgb(220,220,200)'
+        width: 340,
+        height: 50,
+        backgroundColor: 'rgb(205,216,210)',
+        marginVertical: 10,
+        fontSize: 23,
+        paddingLeft: 20
+    },
+    box_white: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        height: 710,
+        width: 460,
+        borderTopLeftRadius: 130,
+        paddingTop: 100,
+        alignItems: 'center',
     }
 
 });

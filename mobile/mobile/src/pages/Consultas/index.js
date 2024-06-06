@@ -1,16 +1,48 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Button, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Consultas = () => {
+
+  const navigation = useNavigation();
+
   return (
 
     <SafeAreaView style={styles.androidSafeArea}>
+
+      <View style={styles.barraPerfil}>
+
+        <Text style={styles.textHeader}>Bem vindo!</Text>
+
+        <FontAwesome name='user' size={35} color={'#053c20'} onPress={() => navigation.navigate('Dados')} />
+
+      </View>
+
+      {/* <Pressable
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? '#b2d8d8' : '#004c4c',
+            width: 150,
+            height: 50,
+            justifyContent: 'center',
+            borderRadius: 10,
+            alignItems: 'center',
+            marginTop: 200,
+            marginBottom: 10
+          },
+        ]}
+        onPress={() => navigation.navigate('Dados')}
+      >
+        <Text style={{ textAlign: 'center', fontSize: 15, fontWeight: 'bold', color: '#fafafa' }}>Dados cadastrais</Text>
+
+      </Pressable> */}
 
       <ScrollView>
 
         <View style={styles.container}>
 
-          <Text>Consultas Screen</Text>
+          <Text>Home Screen</Text>
 
         </View>
 
@@ -33,6 +65,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 897
   },
+  subtitulo3: {
+    color: '#007c7c',
+    fontSize: 19,
+    fontWeight: 'bold',
+    marginLeft: 172
+  },
+  barraPerfil: {
+    width: '100%',
+    height: 55,
+    backgroundColor: '#b4c4bc',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    display: 'flex',
+    padding: 10
+  },
+  textHeader: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#053c20',
+    paddingTop: 6
+  }
 });
 
 
