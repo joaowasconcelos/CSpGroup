@@ -2,7 +2,7 @@ const Pessoa = require("../models/Pessoa")
 const Endereco = require("../models/Endereco");
 const Telefone = require("../models/Telefone");
 const Funcionario = require("../models/Funcionario");
-const { insert } = require("../models/PessoaModel");
+const { insert, selectCPF } = require("../models/PessoaModel");
 
 const cadastro = {
 
@@ -65,7 +65,7 @@ const cadastro = {
                 return res.json({ message: 'Todos os campos são obrigatórios.' });
             }
 
-            const ValidaCPF = novaPessoa.selectCPF(cpf)
+            const ValidaCPF = await selectCPF(cpf)
             console.log(ValidaCPF);
             if (ValidaCPF.length > 0) {
                 return res.json({ message: 'CPF ja cadastrado!' })
@@ -84,7 +84,6 @@ const cadastro = {
             console.log(error)
             res.json(error);
         }
-
     }
 }
 module.exports = { cadastro }

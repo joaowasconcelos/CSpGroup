@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     paddingVertical: 20
   },
   subtitulo3: {
-    color: '#007c7c',
+    color: '#243434',
     fontSize: 23,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: 'center'
   },
   label: {

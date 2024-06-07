@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import {
     SafeAreaView,
     ScrollView,
@@ -71,10 +71,6 @@ const Login = () => {
 
                     </View>
 
-
-
-
-
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -135,10 +131,9 @@ const styles = StyleSheet.create({
         marginLeft: 172
     },
     entradaTexto: {
-        borderRadius: 100,
         color: '#004c4c',
         paddingHorizontal: 10,
-        borderRadius: 100,
+        borderRadius: 30,
         width: 340,
         height: 50,
         backgroundColor: 'rgb(205,216,210)',
@@ -156,6 +151,5 @@ const styles = StyleSheet.create({
         paddingTop: 100,
         alignItems: 'center',
     }
-
 });
 

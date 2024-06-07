@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Home from '../mobile/src/pages/Home';
 import Consultas from '../mobile/src/pages/Consultas';
 import Contato from '../mobile/src/pages/Contato';
 import Dados from '../mobile/src/pages/Dados';
@@ -18,10 +17,10 @@ function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#004c4c',
-        tabBarInactiveTintColor: 'white',
+        tabBarActiveTintColor: '#fafafa',
+        tabBarInactiveTintColor: '#c3c3c3',
         tabBarStyle: {
-          backgroundColor: '#b4c4bc',
+          backgroundColor: '#243434',
         },
       }}
     >
@@ -77,9 +76,9 @@ function LoginStack() {
         component={Dados}
         options={{
           title: 'Dados',
-          headerTintColor: '#053c20',
+          headerTintColor: '#fafafa',
           headerStyle: {
-            backgroundColor: '#b4c4bc',
+            backgroundColor: '#243434'
           },
         }}
       />
