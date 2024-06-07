@@ -53,6 +53,8 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario) {
     } finally {
         bd.release();
     }
+
+    
 }
 
 module.exports = { insert, selectCPF };
