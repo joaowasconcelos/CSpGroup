@@ -15,28 +15,9 @@ const Consultas = () => {
 
         <Text style={styles.textHeader}>Bem vindo!</Text>
 
-        <FontAwesome name='user' size={35} color={'#053c20'} onPress={() => navigation.navigate('Dados')} />
+        <FontAwesome name='user' size={35} color={'#243434'} onPress={() => navigation.navigate('Dados')} />
 
       </View>
-
-      {/* <Pressable
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? '#b2d8d8' : '#004c4c',
-            width: 150,
-            height: 50,
-            justifyContent: 'center',
-            borderRadius: 10,
-            alignItems: 'center',
-            marginTop: 200,
-            marginBottom: 10
-          },
-        ]}
-        onPress={() => navigation.navigate('Dados')}
-      >
-        <Text style={{ textAlign: 'center', fontSize: 15, fontWeight: 'bold', color: '#fafafa' }}>Dados cadastrais</Text>
-
-      </Pressable> */}
 
       <ScrollView>
 
@@ -74,18 +55,36 @@ const styles = StyleSheet.create({
   barraPerfil: {
     width: '100%',
     height: 55,
-    backgroundColor: '#b4c4bc',
     flexDirection: 'row',
     justifyContent: 'space-between',
     display: 'flex',
-    padding: 10
+    padding: 10,
+    backgroundColor: '#f1f1f1'
   },
   textHeader: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: '#053c20',
-    paddingTop: 6
+    color: '#243434',
+    paddingTop: 4
   }
 });
 
 
+// {/* <Pressable
+//         style={({ pressed }) => [
+//           {
+//             backgroundColor: pressed ? '#b2d8d8' : '#004c4c',
+//             width: 150,
+//             height: 50,
+//             justifyContent: 'center',
+//             borderRadius: 10,
+//             alignItems: 'center',
+//             marginTop: 200,
+//             marginBottom: 10
+//           },
+//         ]}
+//         onPress={() => navigation.navigate('Dados')}
+//       >
+//         <Text style={{ textAlign: 'center', fontSize: 15, fontWeight: 'bold', color: '#fafafa' }}>Dados cadastrais</Text>
+
+//       </Pressable> */}
