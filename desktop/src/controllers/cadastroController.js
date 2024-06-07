@@ -5,6 +5,33 @@ const Funcionario = require("../models/Funcionario");
 const { insert } = require("../models/PessoaModel");
 
 const cadastro = {
+
+    paginaCadastro:async (req, res) => {
+        try {
+            res.render('pages/Cadastro');
+        }
+        catch (error) {
+            console.log(error);
+            res.render('pages/pag_erro', { message: error });
+        }
+
+        
+    },
+
+
+    paginaLogin:async (req, res) => {
+        try {
+            res.render('pages/Login');
+        }
+        catch (error) {
+            console.log(error);
+            res.render('pages/pag_erro', { message: error });
+        }
+
+        
+    },
+
+
     adicionaPessoa: async (req, res) => {
         try {
             const { cpf, nome, dataNasc, genero, email, endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }], telefone, funcionario: [{ dataAdmissao, crm }] } = req.body;

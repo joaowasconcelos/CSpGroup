@@ -1,5 +1,5 @@
 const Login = require("../models/Login");
-const Perfis = require("../models/Perfis");
+// const Perfis = require("../models/Perfis");
 
 const LoginPerfis = {
     LoginPessoa: async (req, res) => {

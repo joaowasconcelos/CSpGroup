@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Cadastro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="cadastro-form">
+            <h2 class="text-1">Cadastro</h2>
+            <form action="/submit-cadastro" method="post">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" required>
+
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="data_nasc">Data de Nascimento:</label>
+                <input type="date" id="data_nasc" name="data_nasc" required>
+
+                <label for="genero">Gênero:</label>
+                <select id="genero" name="genero">
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="outro">Outro</option>
+                </select>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="data_cad">Data de Cadastro:</label>
+                <input type="date" id="data_cad" name="data_cad" value="<%= new Date().toISOString().split('T')[0] %>"
+                    required>
+
+            </form>
+        </div>
+
+        <div class="telefone-endereco">
+            <div class="telefone">
+                <h2 class="text-2">Formulário de Telefone</h2>
+                <form action="/submit-telefone" method="post">
+                    <div class="phone-inputs">
+                        <div class="phone-input">
+                            <label for="telefone">Telefone:</label>
+                            <input type="tel" name="telefone[]" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}"
+                                placeholder="99 99999-9999" required>
+                        </div>
+                    </div>
+                    <span class="add-phone" onclick="Cadastro.addPhoneField()">
+                        <i class="fas fa-plus-circle"></i> Adicionar outro telefone
+                    </span>
+                    <br>
+                    
+                </form>
+            </div>
+
+            <div class="endereco">
+                <h2 class="text-3">Endereço</h2>
+                <form action="/submit-endereco" method="post">
+                    <label for="logradouro">Logradouro:</label>
+                    <input type="text" id="logradouro" name="logradouro" required>
+
+                    <label for="bairro">Bairro:</label>
+                    <input type="text" id="bairro" name="bairro" required>
+
+                    <label for="estado">Estado:</label>
+                    <input type="text" id="estado" name="estado" required>
+
+                    <label for="numero">Número:</label>
+                    <input type="text" id="numero" name="numero" required>
+
+                    <label for="complemento">Complemento:</label>
+                    <input type="text" id="complemento" name="complemento">
+
+                    <label for="cep">CEP:</label>
+                    <input type="text" id="cep" name="cep" required>
+
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+        </select>
+
+     
+
+        
+        <div class="container">
+            <h2>Criar Perfil</h2>
+            <form action="/criar-perfil" method="post">
+                <label for="tipo">Tipo de Perfil:</label>
+                <div class="checkbox-container">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="medico" name="perfil" value="medico">
+                        <label for="medico">Médico</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="paciente" name="perfil" value="paciente">
+                        <label for="paciente">Paciente</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="adm" name="perfil" value="adm">
+                        <label for="adm">Administrador</label>
+                    </div>
+                </div>
+                <input type="submit" value="Criar Perfil">
+            </form>
+        </div>
+        
+
+        <script src="/js/cadastro.js"></script>
+</body>
+
+</html>
