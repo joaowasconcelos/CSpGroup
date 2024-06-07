@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Button, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import api from '../../service/api';
+
 
 const Consultas = () => {
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const navigation = useNavigation();
 
