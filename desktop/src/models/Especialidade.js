@@ -1,18 +1,23 @@
 class Especialidade {
     constructor(pId, pDescEspecialidade) {
         this.id = pId;
-        this.descEspecialidade = pDescEspecialidade;
+        this._descEspecialidade = pDescEspecialidade;
     }
 
-    get Id() { return this.id; }
+    get Id() {
+        return this.id;
+    }
 
-    get descEspecialidade() { return this.pDescEspecialidade; }
-    set descEspecialidade(sDescEspecialidade) { this.descEspecialidade = sDescEspecialidade; }
+    get descEspecialidade() {
+        return this._descEspecialidade;
+    }
+
+    set descEspecialidade(sDescEspecialidade) {
+        this._descEspecialidade = sDescEspecialidade;
+    }
 
     validaCampos() {
-        return (
-            this.descEspecialidade
-        )
+        return !!this._descEspecialidade;
     }
 }
 

@@ -24,7 +24,7 @@ class Pessoa {
 
     get Email() { return this.email }
     set Email(sEmail) { this.email = sEmail; }
-
+0
 
     DataConvert(value) {
         let [dia, mes, ano] = value.split('/');

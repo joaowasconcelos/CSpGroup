@@ -1,16 +1,16 @@
 {
-    "cpf": "49914181864",
-    "nome": "joao",
-    "dataNasc": "15/09/2004",
-    "genero": "M",
-    "email": "joaowasconcelos18@gamil.com",
+    "cpf": "21480886882",
+    "nome": "teste",
+    "dataNasc": "28/09/2004",
+    "genero": "F",
+    "email": "joao@gmail",
     "endereco": [
         {
             "logradouro": "Rua: dos corre",
             "bairro": "Portal Bordon",
             "estado": "SP",
-            "numero": "157",
-            "complemento": "Perto da boca",
+            "numeroEndereco": "157",
+            "complementoEndereco": "Perto da boca",
             "cep": "13173-418"
         }
     ],
@@ -21,8 +21,25 @@
     ],
     "funcionario": [
         {
-            "dataAdmissao":"null",
-            "crm":"null"
+            "dataAdmissao": null,
+            "crm": null
+        }
+    ],
+    "Login": [
+        {
+            "login": "49914181864",
+            "senha": "7777777777",
+            "status": "0"
+        }
+    ],
+    "Perfis": [
+        {
+            "tipo": "Medico"
+        }
+    ],
+    "Especialidade":[
+        {
+            "descEspecialidade":"Ortopedista"
         }
     ]
 }
