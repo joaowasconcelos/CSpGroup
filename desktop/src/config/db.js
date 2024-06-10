@@ -24,3 +24,4 @@ async function obterConexaoDoPool() {
 }
 
 module.exports = obterConexaoDoPool;
+module.exports = obterConexaoDoPool;

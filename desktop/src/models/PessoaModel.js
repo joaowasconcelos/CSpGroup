@@ -24,8 +24,10 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
         const enderecoResult = await bd.query('INSERT INTO tbl_endereco (logradouro, bairro, estado, numero, complemento, cep) VALUES (?, ?, ?, ?, ?, ?)',
             [endereco.logradouro, endereco.bairro, endereco.estado, endereco.numeroEndereco, endereco.complementoEndereco, endereco.cep]);
         const enderecoId = enderecoResult[0].insertId;
+        const enderecoId = enderecoResult[0].insertId;
         console.log('ID do Endereço:', enderecoId);
 
+        const pessoaResult = await bd.query('INSERT INTO tbl_pessoa (cpf, nome, data_nasc, genero, email, endereco_id) VALUES (?, ?, ?, ?, ?, ?)',
         const pessoaResult = await bd.query('INSERT INTO tbl_pessoa (cpf, nome, data_nasc, genero, email, endereco_id) VALUES (?, ?, ?, ?, ?, ?)',
             [pessoa.cpf, pessoa.nome, pessoa.dataNasc, pessoa.genero, pessoa.email, enderecoId]);
         const pessoaId = pessoaResult[0].insertId;
@@ -83,7 +85,10 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
         return { error: 'Falha na transação', details: error };
     } finally {
         bd.release();
+        bd.release();
     }
+
+    
 }
 
-module.exports = { insert };
+module.exports = { insert, selectCPF };

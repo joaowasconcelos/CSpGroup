@@ -1,39 +1,97 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { NavigationContainer } from '@react-navigation/native';
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
+import Consultas from '../mobile/src/pages/Consultas';
+import Contato from '../mobile/src/pages/Contato';
+import Dados from '../mobile/src/pages/Dados';
+import Login from '../mobile/src/pages/Login';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function MainTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#fafafa',
+        tabBarInactiveTintColor: '#c3c3c3',
+        tabBarStyle: {
+          backgroundColor: '#243434',
+        },
+      }}
+    >
+      <Tab.Screen
+        name='Consultas'
+        component={Consultas}
+        options={{
+          title: 'Consultas',
+          headerStyle: {
+            backgroundColor: '#b4c4bc',
+          },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='id-card' color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='Contato'
+        component={Contato}
+        options={{
+          title: 'Contato',
+          headerTintColor: '#053c20',
+          headerStyle: {
+            backgroundColor: '#b4c4bc',
+          },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='phone' color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+    
+  );
+}
+
+function LoginStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Main"
+        component={MainTabs}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Dados"
+        component={Dados}
+        options={{
+          title: 'Dados',
+          headerTintColor: '#fafafa',
+          headerStyle: {
+            backgroundColor: '#243434'
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
-    
-    <NavigationContainer>
-
-      <Tab.Navigator>
-        
-        <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
-
-        <Tab.Screen name="Settings" component={SettingsScreen} options={{headerShown: false}} />
-
-      </Tab.Navigator>
-
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <LoginStack />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

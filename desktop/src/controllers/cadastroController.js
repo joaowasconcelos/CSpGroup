@@ -9,6 +9,33 @@ const { insert } = require("../models/PessoaModel")
 
 
 const cadastro = {
+
+    paginaCadastro:async (req, res) => {
+        try {
+            res.render('pages/Cadastro');
+        }
+        catch (error) {
+            console.log(error);
+            res.render('pages/pag_erro', { message: error });
+        }
+
+        
+    },
+
+
+    paginaLogin:async (req, res) => {
+        try {
+            res.render('pages/Login');
+        }
+        catch (error) {
+            console.log(error);
+            res.render('pages/pag_erro', { message: error });
+        }
+
+        
+    },
+
+
     adicionaPessoa: async (req, res) => {
         try {
             const { cpf, nome, dataNasc, genero, email, endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }], telefone, funcionario: [{ dataAdmissao, crm }], Login: [{ login, senha, status }], Perfis: [{ tipo }], Especialidade: [{ descEspecialidade}] } = req.body;
@@ -45,6 +72,7 @@ const cadastro = {
                 return res.json({ message: "Paciente cadastrado com sucesso" });
             } else {
                 novoFuncionario = new Funcionario(null, cpf, nome, dataNasc, genero, email, dataAdmissao, crm);
+                novoFuncionario = new Funcionario(null, cpf, nome, dataNasc, genero, email, dataAdmissao, crm);
                 novoFuncionario.DataConvert(dataAdmissao)
 
                 if (descEspecialidade === null || descEspecialidade === undefined) {
@@ -64,7 +92,6 @@ const cadastro = {
             console.log(error)
             res.json(error);
         }
-
     }
 }
 module.exports = { cadastro }

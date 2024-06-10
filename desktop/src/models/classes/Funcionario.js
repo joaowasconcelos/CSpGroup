@@ -34,8 +34,7 @@ class Funcionario extends Pessoa {
     
     validaCampos() {
         return (
-            this.DataAdmissao &&
-            this.crm
+            this.DataAdmissao 
         )
     }
 }
