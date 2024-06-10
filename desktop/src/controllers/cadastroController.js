@@ -9,36 +9,33 @@ const { insert } = require("../models/PessoaModel")
 
 
 const cadastro = {
-
-    paginaCadastro:async (req, res) => {
-        try {
-            res.render('pages/Cadastro');
-        }
-        catch (error) {
-            console.log(error);
-            res.render('pages/pag_erro', { message: error });
-        }
-
-        
-    },
+    // paginaCadastro: async (req, res) => {
+    //     try {
+    //         res.render('pages/Cadastro');
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+    //         res.render('pages/pag_erro', { message: error });
+    //     }
 
 
-    paginaLogin:async (req, res) => {
-        try {
-            res.render('pages/Login');
-        }
-        catch (error) {
-            console.log(error);
-            res.render('pages/pag_erro', { message: error });
-        }
+    // },
+    // paginaLogin: async (req, res) => {
+    //     try {
+    //         res.render('pages/Login');
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+    //         res.render('pages/pag_erro', { message: error });
+    //     }
 
-        
-    },
+
+    // }
 
 
     adicionaPessoa: async (req, res) => {
         try {
-            const { cpf, nome, dataNasc, genero, email, endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }], telefone, funcionario: [{ dataAdmissao, crm }], Login: [{ login, senha, status }], Perfis: [{ tipo }], Especialidade: [{ descEspecialidade}] } = req.body;
+            const { cpf, nome, dataNasc, genero, email, endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }], telefone, funcionario: [{ dataAdmissao, crm }], Login: [{ login, senha, status }], Perfis: [{ tipo }], Especialidade: [{ descEspecialidade }] } = req.body;
             console.log(req.body)
             const novaPessoa = new Pessoa(null, cpf, nome, dataNasc, genero, email);
             const dataVal = novaPessoa.DataConvert(novaPessoa.dataNasc);
@@ -77,9 +74,9 @@ const cadastro = {
 
                 if (descEspecialidade === null || descEspecialidade === undefined) {
                     return res.json({ message: "Especialidade não cadastrada" });
-                   
-                } 
-                const novaEspecialidade = new Especialidade(null,descEspecialidade );
+
+                }
+                const novaEspecialidade = new Especialidade(null, descEspecialidade);
 
                 if (!novoFuncionario.validaCampos()) {
                     return res.json({ message: 'Todos os campos são obrigatórios.' });
@@ -94,4 +91,5 @@ const cadastro = {
         }
     }
 }
+
 module.exports = { cadastro }
