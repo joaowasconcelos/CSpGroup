@@ -1,31 +1,45 @@
 {
-    "cpf": "49914181864",
-    "nome": "joao",
-    "data_nasc": "15/09/2004",
+    "cpf": "12254789665",
+    "nome": "joaoTeste",
+    "dataNasc": "28/09/2004",
     "genero": "M",
-    "email": "joaowasconcelos18@gamil.com",
+    "email": "joao@gmail",
     "endereco": [
         {
             "logradouro": "Rua: dos corre",
             "bairro": "Portal Bordon",
             "estado": "SP",
-            "numero": "157",
-            "complemento": "Perto da boca",
+            "numeroEndereco": "157",
+            "complementoEndereco": "Perto da boca",
             "cep": "13173-418"
         }
     ],
     "telefone": [
         {
-            "numeroTel": "19995730994"
-        },
-        {
-            "numeroTel": "19888745525"
+            "numeroTelefone": "14770985447"
         }
     ],
     "funcionario": [
         {
-            "data_admissao":"18/10/1981",
-            "crm":"1879258"
+            "dataAdmissao": "14/01/2004",
+            "crm": "0101546"
+        }
+    ],
+    "Login": [
+        {
+            "login": "49914181864",
+            "senha": "7777777777",
+            "status": "1"
+        }
+    ],
+    "Perfis": [
+        {
+            "tipo": "Medico"
+        }
+    ],
+    "Especialidade":[
+        {
+            "descEspecialidade":"oftalmologista"
         }
     ]
 }

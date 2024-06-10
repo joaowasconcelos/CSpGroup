@@ -1,9 +1,11 @@
 class Login {
-    constructor(pId, pLogin, pSenha, pStatus) {
+    constructor(pId, pLogin, pSenha, pStatus,pPessoaId,pPessoaEnderecoId) {
         this.id = pId;
         this.login = pLogin;
         this.senha = pSenha;
         this.status = pStatus;
+        this.pessoaID = pPessoaId;
+        this.pessoaEnderecoId  = pPessoaEnderecoId;
     }
 
     get Id() { return this.id; }
@@ -16,6 +18,12 @@ class Login {
 
     get Status() { return this.status; }
     set Status(sStatus) { this.status = sStatus; }
+
+    get PessoaId() { return this.PessoaId; }
+    set PessoaId(sPessoaId) { this.PessoaId = sPessoaId; }
+
+    get PessoaEnderecoId() { return this.pessoaEnderecoId; }
+    set PessoaEnderecoId(sPessoaEnderecoId) { this.pessoaEnderecoId = sPessoaEnderecoId; }
 
     validaCampos(){
         return(
