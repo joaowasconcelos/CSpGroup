@@ -8,6 +8,7 @@ import Consultas from '../mobile/src/pages/Consultas';
 import Contato from '../mobile/src/pages/Contato';
 import Dados from '../mobile/src/pages/Dados';
 import Login from '../mobile/src/pages/Login';
+import ConsultasMedico from './src/pages/ConsultasMedico';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
@@ -50,6 +51,20 @@ function MainTabs() {
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name='phone' color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='ConsultasMedico'
+        component={ConsultasMedico}
+        options={{
+          title: 'Próximas consultas',
+          headerStyle: {
+            backgroundColor: '#b4c4bc',
+          },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='id-card' color={color} size={size} />
           ),
         }}
       />
