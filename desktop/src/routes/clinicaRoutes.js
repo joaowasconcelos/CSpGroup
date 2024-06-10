@@ -21,8 +21,8 @@ router.use(function (req, res) {
     res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })
 })
 
-const {cadastro} = require("../controllers/cadastroController")
-const{LoginPerfis} = require("../controllers/loginController")
+// const {cadastro} = require("../controllers/cadastroController")
+// const{LoginPerfis} = require("../controllers/loginController")
 const {viewPaciente} = require("../controllers/pacienteController")
 
 router.post("/Pessoa/novo",cadastro.adicionaPessoa);

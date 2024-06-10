@@ -2,7 +2,18 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import api from '../../services/api';
+
 const Dados = () => {
+
+  const infosPaciente = async() =>{
+    try {
+      const response = await api.get(`/paciente/infos`) 
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <SafeAreaView style={styles.safeArea}>
 
