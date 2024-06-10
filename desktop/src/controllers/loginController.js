@@ -1,4 +1,4 @@
-const Login = require("../models/Login");
+const Login= require("../models/classes/Login");
 // const Perfis = require("../models/Perfis");
 
 const LoginPerfis = {

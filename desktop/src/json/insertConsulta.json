@@ -1,0 +1,14 @@
+{
+    "nome": "Fulano A",
+    "cpf": "12345678901",
+    "nomeMedico": "joaoTeste",
+    "cpfMedico": "12254789665",
+    "Consulta": [
+      {
+        "data": "15/09/2004",
+        "hora": "09:30",
+        "status": "não sei"
+      }
+    ]
+  }
+  

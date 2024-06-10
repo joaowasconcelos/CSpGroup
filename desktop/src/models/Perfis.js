@@ -1,4 +1,4 @@
-export class Perfis {
+class Perfis {
     constructor(pid, ptipo, ploginId) {
         this.id = pid;
         this.tipo = ptipo;
