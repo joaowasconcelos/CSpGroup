@@ -1,46 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import api from '../../service/api';
-
-//import {obterConexaoDoPool} from ('../../../../../desktop/src/config/db');
 
 const Dados = () => {
-
-  const [,] = useState();
-  const [,] = useState();
-  const [,] = useState();
-  const [,] = useState();
-
-  const paciente = async () => {
-
-  }
-
-
-
-
-
-
   return (
     <SafeAreaView style={styles.safeArea}>
 
-      <Text style={styles.subtitulo3}>Dados cadastrais</Text>
+    <Text style={styles.subtitulo3}>Dados cadastrais</Text>
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
         {[
-          { label: "Nome completo", key: "Nome" },
-          { label: "Contato", key: "Telefone" },
-          { label: "C.P.F.", key: "CPF" },
-          { label: "Data de nascimento", key: "DataNascimento" },
-          { label: "Gênero", key: "Genero" },
-          { label: "Email", key: "Email" },
-          { label: "Endereço", key: "Logradouro" },
-          { label: "Bairro", key: "Bairro" },
-          { label: "Número da residência", key: "NumeroResidencia" },
-          { label: "Complemento", key: "Complemento" },
-          { label: "C.E.P.", key: "CEP" },
-          { label: "Estado", key: "Estado" }
+          { label: "Nome completo", key: "nome" },
+          { label: "Contato", key: "contato" },
+          { label: "C.P.F.", key: "cpf" },
+          { label: "Data de nascimento", key: "dataNascimento" },
+          { label: "Gênero", key: "genero" },
+          { label: "Email", key: "email" },
+          { label: "Endereço", key: "endereco" },
+          { label: "Bairro", key: "bairro" },
+          { label: "Número da residência", key: "numeroResidencia" },
+          { label: "Complemento", key: "complemento" },
+          { label: "C.E.P.", key: "cep" },
+          { label: "Estado", key: "estado" }
         ].map((field) => (
 
           <View style={styles.sep} key={field.key}>
