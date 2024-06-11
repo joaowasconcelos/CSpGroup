@@ -46,7 +46,7 @@ const Login = () => {
                         <Text style={styles.subtitulo5}>Bem Vindo</Text>
                         <Text style={styles.subtitulo4}>Faça login em sua conta</Text>
 
-                        <TextInput placeholder='Digite seu Email ou C.P.F.' style={styles.entradaTexto}></TextInput>
+                        <TextInput placeholder='Digite seu Email' style={styles.entradaTexto}></TextInput>
                         <TextInput placeholder='Digite sua senha' secureTextEntry={true} style={styles.entradaTexto}></TextInput>
 
                         <Text style={styles.subtitulo3}>Esqueceu a senha?</Text>

@@ -19,7 +19,7 @@ const Consultas = () => {
   const listarConsultas = async () => {
 
     try {
-      const response = await api.get('/paciente/novo') //conferir se essa rota ai ta certa pois não achei
+      const response = await api.get('/paciente/consultas')
 
         .catch(function (error) {
 

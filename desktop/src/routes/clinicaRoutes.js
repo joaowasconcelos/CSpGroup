@@ -24,6 +24,4 @@ router.use(function (req, res) {
     res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })
 })
 
-
-
 module.exports = router;
