@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="/css/Login.css">
+    <link rel="api" href="../../service/Api.js">
 </head>
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
+        <input type="text" id="login" placeholder="login" name="login">
+        <input type="senha" id="senha" placeholder="senha" name="senha">
         <button id="loginButton">Login</button>
 
         <div class="status" id="status"></div>
     </div>
-
+    
     <script>
         document.getElementById('loginButton').addEventListener('click', function() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
+            var username = document.getElementById('login').value;
+            var password = document.getElementById('senha').value;
             var statusDiv = document.getElementById('status');
 
-            fetch('/LoginPessoa', {
+            fetch('/Login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,17 +35,18 @@
             })
             .then(response => response.json())
             .then(data => {
+                
                 if (data.success) {
-                    statusDiv.innerHTML = 'Login successful!';
+                    statusDiv.innerHTML = 'Login bem-sucedido!';
                     // Redirecionar para a página desejada após login bem-sucedido
                     window.location.href = '/';
                 } else {
-                    statusDiv.innerHTML = 'Login failed: ' + data.message;
+                    statusDiv.innerHTML = 'falha no login: ' + data.message;
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                statusDiv.innerHTML = 'An error occurred. Please try again.';
+                statusDiv.innerHTML = 'Um erro ocorreu. Por favor, tente novamente.';
             });
         });
     </script>

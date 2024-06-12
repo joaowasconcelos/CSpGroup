@@ -1,4 +1,5 @@
 const Login = require("../models/classes/Login");
+const { selectLogin, verificarSenha } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
 const LoginPerfis = {
@@ -15,15 +16,24 @@ const LoginPerfis = {
     },
     LoginPessoa: async (req, res) => {
         try {
-            const { login, senha, status, perfis: [{ tipo, loginId }] } = req.body
+            const { username, password } = req.body
+            console.log(username, password)
+
+            //const selecionaLogin = await selectLogin({username, password})
+            const loginConsulta = new Login(null, username, password, null, null, null)
+            console.log(loginConsulta)
+            const result = await selectLogin(loginConsulta)
+            console.log(result)
         } catch (error) {
             console.log(error)
             res.json(error);
+
         }
 
     },
     selecionaLogin: async (req, res) => {
         try {
+            console.log(req.body)
             const cpf = req.body;
             const selecionaLogin = await selectLogin(cpf)
             return res.json(selecionaLogin)
@@ -34,7 +44,8 @@ const LoginPerfis = {
     },
     selecionaTipo: async (req, res) => {
 
-        const {perfis: [{ tipo}] } = req.body
+        const { perfis: [{ tipo }] } = req.body
+        console.log(tipo)
         const selecionaTipo = await Perfis.selectTipo(tipo)
         return res.json(selecionaTipo)
     }
