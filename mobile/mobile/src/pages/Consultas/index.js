@@ -1,42 +1,102 @@
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Button, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Button, Pressable, FlatList } from 'react-native';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import api from '../../service/api';
 
+import api from '../../service/api';
 
 const Consultas = () => {
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const navigation = useNavigation();
+  const route = useRoute();
+
+  let [flatListConsultas, setFlatListClientes] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [refresh, setRefresh] = useState(false);
+  const [status, setStatus] = useState(false);
+
+  const listarConsultas = async () => {
+
+    try {
+      const response = await api.get('/paciente/novo') //conferir se essa rota ai ta certa pois não achei
+
+        .catch(function (error) {
+
+          if (error.response) {
+
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+
+          } else if (error.resquest) {
+
+            if ((error.resquest._response).include('Failed')) {
+              console.log('Erro ao conectar com API');
+
+            }
+          } else {
+
+            console.log(error.message);
+
+          }
+
+          console.log(error.config);
+
+        });
+      if (response != undefined) {
+        if (response.data.length > 0) {
+
+          let temp = [];
+          for (let i = 0; i < response.data.length; i++) {
+            temp.push(response.data[i]);
+
+          }
+          setFlatListClientes(temp);
+          temp = [];
+
+        } else {
+          setAlertMessage('Nenhum registro foi localizado!')
+          exibeAlert();
+          return;
+        }
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      listarConsultas();
+    }, [refresh])
+  )
+
+
+  let listViewItem = (item) => {
+
+    return (
+
+      <View style={styles.modeloCard}>
+
+        <Text style={styles.textHeader}>{item.funcionario_pessoa_id}</Text>
+        <Text style={styles.textHeader}>{item.especialidade}</Text>
+
+        <Text style={styles.textHeader}>Data da consulta:</Text>
+        <Text style={styles.textValue}>{item.data}</Text>
+
+        <Text style={styles.textHeader}>Horário:</Text>
+        <Text style={styles.textValue}>{item.hora}</Text>
+
+        <Text style={styles.textHeader}>Status da consulta:</Text>
+        <Text style={styles.textValue}>{item.status}</Text>
+      </View>
+    )
+
+  }
+
 
   return (
 
@@ -50,19 +110,19 @@ const Consultas = () => {
 
       </View>
 
-      <ScrollView>
-
-        <View style={styles.container}>
-
-          <Text>Home Screen</Text>
-
-        </View>
-
-      </ScrollView>
+      <View style={{ flex: 1 }}>
+        <FlatList
+          style={{ marginTop: 20 }}
+          contentContainerStyle={{ paddingHorizontal: 20 }}
+          data={flatListConsultas}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => listViewItem(item)}
+        />
+      </View>
 
     </SafeAreaView>
   );
-};
+}
 
 export default Consultas;
 
@@ -97,25 +157,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#243434',
     paddingTop: 4
+  },
+  modeloCard: {
+    backgroundColor: 'purple',
+    marginBottom: 30,
+    padding: 15,
+    borderRadius: 10,
+    elevation: 8,
+  },
+  textValue: {
+    color: 'white',
+    fontSize: 18
   }
 });
 
-
-// {/* <Pressable
-//         style={({ pressed }) => [
-//           {
-//             backgroundColor: pressed ? '#b2d8d8' : '#004c4c',
-//             width: 150,
-//             height: 50,
-//             justifyContent: 'center',
-//             borderRadius: 10,
-//             alignItems: 'center',
-//             marginTop: 200,
-//             marginBottom: 10
-//           },
-//         ]}
-//         onPress={() => navigation.navigate('Dados')}
-//       >
-//         <Text style={{ textAlign: 'center', fontSize: 15, fontWeight: 'bold', color: '#fafafa' }}>Dados cadastrais</Text>
-
-//       </Pressable> */}

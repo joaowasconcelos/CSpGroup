@@ -10,29 +10,19 @@ const {verificaCpf} = require("../models/PessoaModel")
 
 
 const cadastro = {
-    // paginaCadastro: async (req, res) => {
-    //     try {
-    //         res.render('pages/Cadastro');
-    //     }
-    //     catch (error) {
-    //         console.log(error);
-    //         res.render('pages/pag_erro', { message: error });
-    //     }
+
+    
+  paginaCadastro: async (req, res) => {
+        try {
+            res.render('pages/Cadastro');
+        }
+        catch (error) {
+            console.log(error);
+            res.render('pages/pag_erro', { message: error });
+        }
 
 
-    // },
-    // paginaLogin: async (req, res) => {
-    //     try {
-    //         res.render('pages/Login');
-    //     }
-    //     catch (error) {
-    //         console.log(error);
-    //         res.render('pages/pag_erro', { message: error });
-    //     }
-
-
-    // }
-
+    },
 
     adicionaPessoa: async (req, res) => {
         try {
