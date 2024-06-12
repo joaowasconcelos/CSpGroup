@@ -2,25 +2,25 @@ const express = require("express");
 const router = express.Router();
 
 const { cadastro } = require("../controllers/cadastroController")
-const { LoginPerfis } = require("../controllers/loginController")
+// const { LoginPerfis } = require("../controllers/loginController")
 const {cadastroEspecia} = require("../controllers/cadastroEspecialidade");
 const {cadastroConsulta} = require("../controllers/cadastroConsulta");
-const { viewPaciente } = require("../controllers/pacienteController");
+// const { viewPaciente } = require("../controllers/pacienteController");
 
-router.get('/', (req, res) => {
-    res.render('index', { title: 'Página Inicial' });
-});
+// router.get('/', (req, res) => {
+//     res.render('index', { title: 'Página Inicial' });
+// });
 
-router.use(function (req, res) {
-    res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })
-})
+// router.use(function (req, res) {
+//     res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })
+// })
 
 
 router.post("/Pessoa/novo",cadastro.adicionaPessoa);
 router.post ("/Cadastro/Especialidade",cadastroEspecia.cadastraEspecialidade)
 router.post ("/Cadastro/Consulta",cadastroConsulta.cadastraConsulta)
-router.post("/Login",LoginPerfis.LoginPessoa);
-router.get("/paciente/infos",viewPaciente.selecionaInfosPaciente);
-router.get("/paciente/consultas", viewPaciente.selecionaConsultas);
+// router.post("/Login",LoginPerfis.LoginPessoa);
+// router.get("/paciente/infos",viewPaciente.selecionaInfosPaciente);
+// router.get("/paciente/consultas", viewPaciente.selecionaConsultas);
 
 module.exports = router;
