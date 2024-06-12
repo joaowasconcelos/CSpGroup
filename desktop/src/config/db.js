@@ -9,7 +9,7 @@ async function criarPoolDeConexoes() {
             port: '3306',
             database: 'clinica',
             user: 'root',
-            password: '12345',
+            password: '1234',
             waitForConnections: true, // Aguarda conexões se não houver disponíveis no momento
             connectionLimit: 10, // Limite máximo de conexões no pool
             multipleStatements: true // Permitir a execução de várias queries ao mesmo tempo
@@ -23,5 +23,4 @@ async function obterConexaoDoPool() {
     return pool.getConnection();
 }
 
-module.exports = obterConexaoDoPool;
 module.exports = obterConexaoDoPool;
