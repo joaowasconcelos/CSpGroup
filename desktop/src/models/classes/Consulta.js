@@ -26,6 +26,13 @@ class Consulta {
         )
     }
 
+    DataConvert(value) {
+        let [dia, mes, ano] = value.split('/');
+        let dataFormatada = `${ano}-${mes}-${dia}`;
+        this.Data = new Date(dataFormatada);
+        return this.Data
+    }
+
 }
 
 module.exports = Consulta;

@@ -5,26 +5,30 @@ async function selectInfosPaciente(id) {
     const bd = await conectarBancoDeDados();
     try {
         const selectInfosPaciente = await bd.query(`
-            SELECT 
-                p.nome AS Nome,
-                p.cpf AS CPF,
-                p.data_nasc AS DataNascimento,
-                p.genero AS Genero,
-                p.email AS Email,
-                e.logradouro AS Logradouro,
-                e.bairro AS Bairro,
-                e.estado AS Estado,
-                e.numero AS NumeroResidencia,
-                e.complemento AS Complemento,
-                e.cep AS CEP,
-                t.numero AS Telefone
-            FROM
-                tbl_pessoa p
-            INNER JOIN 
-                tbl_endereco e ON p.id = e.id
-            INNER JOIN 
-                tbl_telefone t ON p.id= t.id
-            WHERE p.id=?; `, [id]);
+          SELECT 
+   p.nome AS Nome,
+    p.cpf AS CPF,
+    p.data_nasc AS DataNascimento,
+    p.genero AS Genero,
+    p.email AS Email,
+    e.logradouro AS Logradouro,
+    e.bairro AS Bairro,
+    e.estado AS Estado,
+    e.numero AS NumeroResidencia,
+    e.complemento AS Complemento,
+    e.cep AS CEP,
+    t.numero AS Telefone
+    
+    FROM
+        tbl_pessoa p
+    INNER JOIN 
+        tbl_pessoa_has_tbl_telefone pt ON p.id = pt.pessoa_id
+    INNER JOIN 
+        tbl_telefone t ON pt.telefone_id = t.id
+    INNER JOIN 
+        tbl_endereco e ON pt.pessoa_tbl_endereco_id = e.id
+    WHERE 
+    p.id = ?; `, [id]);
         return selectInfosPaciente
     } catch (error) {
         throw error;

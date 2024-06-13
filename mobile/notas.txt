@@ -12,6 +12,7 @@ npm i mdb-react-ui-kit
 npm i @fortawesome/fontawesome-free
 npx expo install expo-linear-gradient
 impc i axios
+npm install mongoose (O mongoose é uma biblioteca de modelagem de dados para MongoDB e Node.js. Ela fornece uma solução baseada em esquemas para a modelagem de dados da aplicação, incluindo validação integrada, consultas, relacionamentos e outras funcionalidades úteis para trabalhar com o banco de dados MongoDB.)
 
 
 ---------------
@@ -30,3 +31,4 @@ telas do médico tambem serão necessarias
 
 
 
+'react-router-dom'

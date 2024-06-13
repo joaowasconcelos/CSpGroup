@@ -34,7 +34,4 @@ async function selectLogin(objLogin) {
 }
 
 
-
-
-
 module.exports = { selectLogin }
