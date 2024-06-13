@@ -16,8 +16,7 @@ router.post("/Pessoa/novo",cadastro.adicionaPessoa);
 router.post ("/Cadastro/Especialidade",cadastroEspecia.cadastraEspecialidade)
 router.post ("/Cadastro/Consulta",cadastroConsulta.cadastraConsulta)
 router.get ("/Login",LoginPerfis.paginaLogin) /*Direciona para a pagina de login*/
-router.post("/Login",LoginPerfis.LoginPessoa);
-router.get('/login/loginCef', LoginPerfis.selecionaLogin);
+router.post("/Login/entrar",LoginPerfis.LoginPessoa);
 router.get('/login/loginTipo', LoginPerfis.selecionaTipo);
 router.get("/paciente/infos",viewPaciente.selecionaInfosPaciente);
 router.get("/paciente/consultas", viewPaciente.selecionaConsultas);
