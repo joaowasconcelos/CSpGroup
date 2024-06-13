@@ -1,4 +1,4 @@
-export class Prontuario {
+class Prontuario {
     constructor(pId, pDiagnostico, pMedicacao) {
         this.id = pId;
         this.diagnostico = pDiagnostico;
@@ -20,3 +20,5 @@ export class Prontuario {
         )
     }
 }
+
+module.exports = Prontuario;

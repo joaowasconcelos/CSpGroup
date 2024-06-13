@@ -6,6 +6,7 @@ const Login = require("../models/classes/Login");
 const Perfis = require("../models/classes/Perfis")
 const Especialidade = require("../models/classes/Especialidade")
 const { insert } = require("../models/PessoaModel")
+const {verificaCpf} = require("../models/PessoaModel")
 
 
 const cadastro = {
@@ -25,9 +26,20 @@ const cadastro = {
 
     adicionaPessoa: async (req, res) => {
         try {
+            let result = null;
+
             const { cpf, nome, dataNasc, genero, email, endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }], telefone, funcionario: [{ dataAdmissao, crm }], Login: [{ login, senha, status }], Perfis: [{ tipo }], Especialidade: [{ descEspecialidade }] } = req.body;
             console.log(req.body)
             const novaPessoa = new Pessoa(null, cpf, nome, dataNasc, genero, email);
+            const verificaCp = novaPessoa.validaCpf(novaPessoa.Cpf)
+            if(verificaCp !== true){
+            return res.json({message:"CPF INVALIDO"})
+            }
+                result = await verificaCpf(novaPessoa.cpf)
+                if(result[0][0].total >0){
+                    return res.json({message:"CPF já cadastrado"})
+                }
+  
             const dataVal = novaPessoa.DataConvert(novaPessoa.dataNasc);
             if (dataVal == "Invalid Date" || !(new Date(novaPessoa.dataNasc) instanceof Date)) {
                 return res.json({ message: "Data informada é invalida" });
@@ -48,7 +60,7 @@ const cadastro = {
 
 
             let novoFuncionario = null;
-            let result = null;
+         
 
             if (!novaPessoa.validaCampos() || !novoEndereco.validaCampos() || !novoLogin.validaCampos() || !novoPerfis.validaCampos()) {
                 return res.json({ message: 'Todos os campos são obrigatórios.' });
@@ -58,7 +70,6 @@ const cadastro = {
                 result = await insert(novaPessoa, novoEndereco, objTelefone, null, novoLogin, novoPerfis, null);
                 return res.json({ message: "Paciente cadastrado com sucesso" });
             } else {
-                novoFuncionario = new Funcionario(null, cpf, nome, dataNasc, genero, email, dataAdmissao, crm);
                 novoFuncionario = new Funcionario(null, cpf, nome, dataNasc, genero, email, dataAdmissao, crm);
                 novoFuncionario.DataConvert(dataAdmissao)
 

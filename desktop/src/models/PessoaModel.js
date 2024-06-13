@@ -1,17 +1,31 @@
 const conectarBancoDeDados = require("../config/db")
 
+async function verificaCpf(pessoa) {
+    const bd = await conectarBancoDeDados();
+    try {
+        const verificaCPF = await bd.query(`SELECT count (cpf) as total FROM tbl_pessoa where cpf =? `, [pessoa])
+        return verificaCPF
+    } catch (error) {
+        await bd.rollback();
+        console.log('Erro na transação:', error);
+        return { error: 'Falha na transação', details: error };
+    } finally {
+        bd.release();
+    }
+}
+
+
 async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, perfis, especialidades) {
     const bd = await conectarBancoDeDados();
     try {
         await bd.beginTransaction();
 
-        const IdTelefone = await bd.query(`SELECT numero FROM tbl_telefone WHERE numero = ? limit 1;`, [telefones[0].numeroTelefone]);
+        // const IdTelefone = await bd.query(`SELECT numero FROM tbl_telefone WHERE numero = ? limit 1;`, [telefones[0].numeroTelefone]);
 
-        if (IdTelefone[0].length > 0 ) {
-            console.log("Telefone já cadastrado na base de dados");
-            return('Telefone já cadastrado na base de dados');
-        }
-     
+        // if (IdTelefone[0].length > 0) {
+        //     console.log("Telefone já cadastrado na base de dados");
+        //     return `Telefone já cadastrado na base de dados`;
+        // }
 
         const idtel = []
         telefones.forEach(async (tel) => {
@@ -58,32 +72,33 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
         const perfisId = perfisResult[0].insertId
         console.log('ID do Perfil:', perfisId);
 
-        const IdEspecialidade = await bd.query(`SELECT id FROM tbl_especialidade WHERE desc_especialidade = ? limit 1;`, [especialidades._descEspecialidade]);
-        if (IdEspecialidade[0][0] == undefined) {
-            console.log("Especialidade não encontrada");
-            return
+
+        if (pacienteFuncionario !== null) {
+            const IdEspecialidade = await bd.query(`SELECT id FROM tbl_especialidade WHERE desc_especialidade = ? limit 1;`, [especialidades._descEspecialidade]);
+         
+            const IdEspecialidades = IdEspecialidade[0][0].id;
+            console.log("ID da Especialidade", IdEspecialidade[0][0].id)
+
+            const idesp = []
+            testeEsp = [especialidades]
+
+            testeEsp.forEach(async (esp) => {
+                const resEsp = await bd.query(`INSERT INTO tbl_funcionario_has_tbl_especialidade (funcionario_id,funcionario_pessoa_id,funcionario_pessoa_endereco_id,especialidade_id) VALUES (?,?,?,?);`,
+                    [funcionarioId, pessoaId, enderecoId, IdEspecialidades]);
+                idesp.push(resEsp.insertId);
+                console.log("Inseriu Funcionario e Especialidade")
+            });
         }
-        const IdEspecialidades = IdEspecialidade[0][0].id;
-        console.log("ID da Especialidade",IdEspecialidade[0][0].id)
 
-        const idesp = []
-        testeEsp = [especialidades]
-
-        testeEsp.forEach(async (esp) => {
-            const resEsp = await bd.query(`INSERT INTO tbl_funcionario_has_tbl_especialidade (funcionario_id,funcionario_pessoa_id,funcionario_pessoa_endereco_id,especialidade_id) VALUES (?,?,?,?);`,
-                [funcionarioId, pessoaId, enderecoId, IdEspecialidades]);
-            idesp.push(resEsp.insertId);
-            console.log("Inseriu Funcionario e Especialidade")
-        });
-        await bd.commit();
+            await bd.commit();
+        }
+        catch (error) {
+            await bd.rollback();
+            console.log('Erro na transação:', error);
+            return { error: 'Falha na transação', details: error };
+        } finally {
+            bd.release();
+        }
     }
-    catch (error) {
-        await bd.rollback();
-        console.log('Erro na transação:', error);
-        return { error: 'Falha na transação', details: error };
-    } finally {
-        bd.release();
-    }
-}
 
-module.exports = { insert };
+    module.exports = { insert, verificaCpf };
