@@ -6,6 +6,8 @@ const { LoginPerfis } = require("../controllers/loginController")
 const {cadastroEspecia} = require("../controllers/cadastroEspecialidade");
 const {cadastroConsulta} = require("../controllers/cadastroConsulta");
 const { viewPaciente } = require("../controllers/pacienteController");
+const { viewMedico }= require("../controllers/MedicoController")
+const { viewAdm} = require("../controllers/AdmController")
 
 router.get('/', (req, res) => {
     res.render('index', { title: 'Página Inicial' });
@@ -20,8 +22,12 @@ router.post("/Login",LoginPerfis.LoginPessoa);
 router.get('/login/loginCef', LoginPerfis.selecionaLogin);
 router.get('/login/loginTipo', LoginPerfis.selecionaTipo);
 router.get("/paciente/infos",viewPaciente.selecionaInfosPaciente);
+router.get ("/Consulta",cadastroConsulta.paginaConsulta) /*Direciona para a pagina de login*/
 router.get("/paciente/consultas", viewPaciente.selecionaConsultas);
 
+router.get ("/Paciente",viewPaciente.paginaPaciente) /*Direciona para a pagina de login*/
+router.get ("/Medico",viewMedico.paginaMedico) /*Direciona para a pagina de login*/
+router.get ("/Adm",viewAdm.paginaAdm) /*Direciona para a pagina de adm*/
 router.use(function (req, res) {
     res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })
 })

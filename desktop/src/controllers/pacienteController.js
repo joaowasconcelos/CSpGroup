@@ -1,6 +1,20 @@
 const { selectInfosPaciente, selectConsultas } = require("../models/PacienteModel")
 
 const viewPaciente = {
+
+    paginaPaciente: async (req, res) => {
+        try {
+            res.render('pages/Paciente');
+        }
+        catch (error) {
+            console.log(error);
+            res.render('pages/pag_erro', { message: error });
+        }
+
+
+    },
+
+
     selecionaInfosPaciente: async (req, res) => {
         try {
             const id = req.body;
