@@ -24,6 +24,33 @@ const Login = () => {
         navigation.navigate('Main');
     };
 
+    const getLogin = async (login, senha) => {
+        try {
+            const response = await api.get(`/Login/mobileEntrar/${login}`).catch(function (error) {
+                if (error.response) {
+                  console.log(error.response.data);
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+                } else if (error.request) {
+                  if ((error.request._response).includes('Failed')) {
+                    console.log('Erro ao conectar a API.');
+                  }
+                } else {
+                  console.log('Erro', error.message);
+                }
+                console.log(error.config);
+              });
+        
+              if (response !== undefined && response.data.length > 0) {
+                setPacienteData(response.data[0]);
+              } else {
+                alert('Nenhum registro foi localizado!');
+              }
+        } catch (error) {
+            
+        }
+    }
+
     return (
 
         <SafeAreaView style={styles.androidSafeArea}>
