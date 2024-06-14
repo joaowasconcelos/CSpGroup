@@ -14,15 +14,44 @@ import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const logo = require('../../../assets/logo_medical.png');
+import api from '../../service/api';
 
 const Login = () => {
-    
+
     const navigation = useNavigation();
 
     const navegaLogin = () => {
         // Navega para a tela principal
         navigation.navigate('Main');
     };
+
+    const listarPaciente = async (cpf,senha) => {
+        try {
+            const response = await api.get(`/login/${cpf,senha}`)
+                .catch(function (error) {
+                    console.log(error)
+                });
+            if (response != undefined) {
+                // if (response.data.length > 0) {
+                //     // console.log(response.data)
+                //     let temp = [];
+                //     for (let i = 0; i < response.data.length; i++) {
+                //         temp.push(response.data[i]);
+                //         serFlatListPacientes(temp);
+                //         // console.log(temp)
+                //     }
+                //     temp = [];
+                // } else {
+                //     setAlertMessage('Nenhum registro foi localizado!')
+                //     exibeAlert();
+                //     return;
+                // }
+            }
+
+        } catch (error) {
+            throw error;
+        }
+    }
 
     return (
 

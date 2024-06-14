@@ -1,5 +1,5 @@
 const Login = require("../models/classes/Login");
-const { selectLogin, verificarSenha } = require('../models/LoginModel')
+const { selectLogin } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
 const LoginPerfis = {

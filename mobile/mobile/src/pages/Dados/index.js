@@ -25,46 +25,48 @@ const Dados = () => {
 
   let [flatListPacientes, serFlatListPacientes] = useState([]);
 
-  // const listarPacientes = async (id) => {
-  //   try {
-  //     const response = await api.get('/paciente/infos')
-  //       .catch(function (error) {
-  //         if (error.response) {
-  //           console.log(error.response.data);
-  //           console.log(error.response.status);
-  //           console.log(error.response.headers);
-  //         } else if (error.request) {
-  //           if ((error.request._response).includes('Failed')) {
-  //             console.log('Erro ao conecta coma API');
-  //           }
-  //         } else {
-  //           console.log(error.message);
-  //         }
-  //         console.log(error.config)
-  //       });
-  //     if (response != undefined) {
-  //       if (response.data.length > 0) {
-  //         // console.log(response.data)
-  //         let temp = [];
-  //         for (let i = 0; i < response.data.length; i++) {
-  //           temp.push(response.data[i]);
-  //           serFlatListPacientes(temp);
-  //           // console.log(temp)
-  //         }
-  //         temp = [];
-  //       } else {
-  //         setAlertMessage('Nenhum registro foi localizado!')
-  //         exibeAlert();
-  //         return;
-  //       }
-  //     }
+  const listarPaciente = async (id) => {
+    try {
+      const response = await api.get(`/paciente/infos/${id}`)
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            if ((error.request._response).includes('Failed')) {
+              console.log('Erro ao conecta coma API');
+            }
+          } else {
+            console.log(error.message);
+          }
+          console.log(error.config)
+        });
+      if (response != undefined) {
+        if (response.data.length > 0) {
+          // console.log(response.data)
+          let temp = [];
+          for (let i = 0; i < response.data.length; i++) {
+            temp.push(response.data[i]);
+            serFlatListPacientes(temp);
+            // console.log(temp)
+          }
+          temp = [];
+        } else {
+          setAlertMessage('Nenhum registro foi localizado!')
+          exibeAlert();
+          return;
+        }
+      }
 
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+    } catch (error) {
+      throw error;
+    }
+  }
 
-  //let listViewPaciente = ()
+  let listViewPaciente = ()=>{
+
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
