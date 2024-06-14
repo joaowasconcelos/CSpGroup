@@ -9,6 +9,12 @@
         "hora": "09:30",
         "status": "não sei"
       }
+    ],
+    "Prontuario": [
+      {
+        "diagnostico": "Morreu",
+        "medicacao": "Dipirona"
+      }
     ]
   }
   

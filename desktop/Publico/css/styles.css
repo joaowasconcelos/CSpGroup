@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    margin-top: 100px;
 }
 
 
@@ -10,11 +11,18 @@ body {
 header {
     background: #00665E;
     color: #fff;
-    padding: 10px 0;
+    padding: 20px 0;
     text-align: center;
-   
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
+.logo{
+    margin-top: -10px;
+}
 
 
 
@@ -56,9 +64,7 @@ footer {
 }
 
 
-.logo{
-    margin-top: -30px;
-}
+
 
 
 .btn-Login {
