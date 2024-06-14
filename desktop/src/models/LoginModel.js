@@ -1,10 +1,10 @@
 const conectarBancoDeDados = require("../config/db");
 
-async function selectLogin(objLogin) {
-    console.log('HELP =>', objLogin.login, objLogin.senha);
+async function selectLogin(login) {
+    console.log('HELP MODEL=>', login);
     const bd = await conectarBancoDeDados();
     try {
-        console.log(objLogin.login, objLogin.senha);
+        // console.log(objLogin.login, objLogin.senha);
         // await bd.beginTransaction();
         const selectLogin = await bd.query(`
             SELECT 
@@ -19,7 +19,7 @@ async function selectLogin(objLogin) {
             ON lo.id= pe.login_id
             inner join tbl_pessoa AS p
             ON lo.pessoa_id=p.id
-            WHERE p.cpf = ?`, [objLogin.login]);
+            WHERE p.cpf = ?`, [login]);
          
          return selectLogin;
     }
