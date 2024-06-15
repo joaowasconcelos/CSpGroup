@@ -4,6 +4,20 @@ const { insertConsulta} = require("../models/ConsultaModel");
 
 
 const cadastroConsulta = {
+
+    paginaConsulta: async (req, res) => {
+        try {
+            res.render('pages/Consulta');
+        }
+        catch (error) {
+            console.log(error);
+            res.render('pages/pag_erro', { message: error });
+        }
+
+
+    },
+
+
     cadastraConsulta: async (req, res) => {
         try {
             const { nome, cpf, nomeMedico, cpfMedico, Consulta: [{ data, hora, status }] } = req.body;
@@ -28,6 +42,8 @@ const cadastroConsulta = {
             res.status(500).json({ error: "Erro ao cadastrar uma Consulta" });
         }
     }
+
 };
+
 
 module.exports = { cadastroConsulta };

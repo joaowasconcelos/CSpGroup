@@ -5,13 +5,20 @@ const Consultas = require("../models/classes/Consulta");
 
 
 const viewPaciente = {
-    selecionaTodosPacientes: async(req,res) =>{
+
+    paginaPaciente: async (req, res) => {
         try {
-            
-        } catch (error) {
-            
+            res.render('pages/Paciente');
         }
+        catch (error) {
+            console.log(error);
+            res.render('pages/pag_erro', { message: error });
+        }
+
+
     },
+
+
 
     selecionaInfosPaciente: async (req, res) => {
         try {
