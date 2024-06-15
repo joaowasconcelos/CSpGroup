@@ -1,6 +1,6 @@
 const Consulta = require("../models/classes/Consulta");
-const Prontuario = require("../models/classes/Prontuario")
-const { insertConsulta } = require("../models/ConsultaModel");
+const Pessoa = require("../models/classes/Pessoa")
+const { insertConsulta} = require("../models/ConsultaModel");
 
 
 const cadastroConsulta = {
@@ -20,20 +20,22 @@ const cadastroConsulta = {
 
     cadastraConsulta: async (req, res) => {
         try {
-            const { nome, cpf, nomeMedico, cpfMedico, Consulta: [{ data, hora, status }],Prontuario:[{diagnostico,medicacao}] } = req.body;
+            const { nome, cpf, nomeMedico, cpfMedico, Consulta: [{ data, hora, status }] } = req.body;
             console.log(req.body);
             const novaConsulta = new Consulta(null, data, hora, status);
-            const novoProntuario = new Prontuario(null,diagnostico,medicacao)
-            if (!novaConsulta.validaCampos() || !novoProntuario.validaCampos()) {
+            const novoPaciente = new Pessoa(null,cpf,nome,null,null,null);
+            const novoMedico = new Pessoa(null,cpfMedico,nomeMedico,null,null,null)
+            if (!novaConsulta.validaCampos()) {
                 return res.json({ message: 'Todos os campos são obrigatórios.' });
             }
             const dataConsulta = novaConsulta.DataConvert(novaConsulta.Data)
             if (dataConsulta == "Invalid Date" || !(new Date(novaConsulta.Data) instanceof Date)) {
                 return res.json({ message: "Data informada é invalida" });
             }
+           
 
-            const result = await insertConsulta(nome, cpf, novaConsulta, nomeMedico, cpfMedico,novoProntuario);
-            
+            const result = await insertConsulta(novoPaciente, novaConsulta, novoMedico);
+            console.log("teste",result)        
 
         } catch (error) {
             console.error("Erro ao cadastrar Consulta:", error);

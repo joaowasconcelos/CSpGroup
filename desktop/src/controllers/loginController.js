@@ -2,6 +2,8 @@ const Login = require("../models/classes/Login");
 const { selectLogin, verificarSenha } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
+
+
 const LoginPerfis = {
     paginaLogin: async (req, res) => {
         try {
@@ -20,6 +22,15 @@ const LoginPerfis = {
             const loginConsulta = new Login(null, login, senha, null, null, null)
             console.log(loginConsulta)
             const result = await selectLogin(loginConsulta)
+
+            if (result === "Medico") {
+                console.log(result)
+                console.log("entrou")
+              
+                return res.render('pages/Cadastro'); 
+           
+            }
+
             console.log('aqui', result[0][0].senha)
             if (senha != result[0][0].senha) {
                 return res.json({ message: 'Senha incorreta' })
@@ -30,6 +41,7 @@ const LoginPerfis = {
                 return res.render('/Medico', { data: result[0] })
             }
             return res.render('/Adm', { data: result[0] })
+
 
         } catch (error) {
             console.log(error)
@@ -82,6 +94,8 @@ const LoginPerfis = {
         const selecionaTipo = await Perfis.selectTipo(tipo)
         return res.json(selecionaTipo)
     },
+
+
     // verificarSenha: () =>{
     //     bcrypt.compare(password, user.password, (err, isMatch) => {
     //         if (err) {
@@ -96,5 +110,6 @@ const LoginPerfis = {
     //         }
     //     });
     // }
+
 }
 module.exports = { LoginPerfis }

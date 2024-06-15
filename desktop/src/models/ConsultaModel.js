@@ -1,21 +1,19 @@
 const conectarBancoDeDados = require("../config/db");
 
-async function insertConsulta(nomeP, cpfP, novaConsulta, nomeMedico, cpfMedico, diagnostico, medicacao) {
+async function insertConsulta(novoPaciente, novaConsulta, novoMedico, novoProntuario) {
     const bd = await conectarBancoDeDados();
     try {
         await bd.beginTransaction();
 
+        const pessoaResult = await bd.query(
+            `SELECT id FROM tbl_pessoa WHERE nome = ? AND cpf = ? limit 1;`,
+            [novoPaciente.nome, novoPaciente.cpf]
 
-        const [pessoaResult] = await bd.query(
-            `SELECT id FROM tbl_pessoa WHERE nome = ? AND cpf = ?;`,
-            [nomeP, cpfP]
         );
 
-        if (pessoaResult.length === 0) {
-            throw new Error('Pessoa não encontrada.');
-        }
-        console.log(pessoaResult[0])
-        const pessoaId = pessoaResult[0].id;
+        console.log(pessoaResult[0][0].id)
+        const pessoaId = pessoaResult[0][0].id;
+        console.log("teste", pessoaId)
         console.log('ID da Pessoa:', pessoaId);
 
 
@@ -23,23 +21,13 @@ async function insertConsulta(nomeP, cpfP, novaConsulta, nomeMedico, cpfMedico, 
             `SELECT id FROM tbl_paciente WHERE pessoa_id = ?;`,
             [pessoaId]
         );
-
-        if (pacienteResult.length === 0) {
-            throw new Error('Paciente não encontrado.');
-        }
-
         const pacienteId = pacienteResult[0].id;
         console.log('ID do Paciente:', pacienteId);
         const [funcionarioResult] = await bd.query(
             `SELECT id FROM tbl_funcionario WHERE pessoa_id = (SELECT id FROM tbl_pessoa WHERE nome = ? AND cpf = ? limit 1);`,
-            [nomeMedico, cpfMedico]
+            [novoMedico.nome, novoMedico.cpf]
 
         );
-
-        if (funcionarioResult.length === 0) {
-            throw new Error('Funcionário não encontrado.');
-        }
-
         const funcionarioId = funcionarioResult[0].id;
         console.log('ID do Funcionário:', funcionarioId);
 
@@ -74,15 +62,9 @@ async function insertConsulta(nomeP, cpfP, novaConsulta, nomeMedico, cpfMedico, 
             [novaConsulta.data, novaConsulta.hora, novaConsulta.status, pacienteId, pessoaId, funcionarioId, funcionarioPessoaId, especialidadeId]
         );
         console.log('Consulta inserida com sucesso:', IdConsulta.insertId);
-
-        const IdProntuario = await bd.query(`INSERT INTO tbl_prontuario (diagnostico,medicacao,especialidade_id,consulta_id,consulta_paciente_id,consulta_paciente_pessoa_id,consulta_funcionario_id,consulta_funcionario_pessoa_id)
-            VALUES(?,?,?,?,?,?,?,?);`
-        [diagnostico, medicacao, especialidadeId, IdConsulta, pacienteId, pessoaId, funcionarioId, funcionarioPessoaId]
-        );
-        console.log(IdProntuario)
-
         await bd.commit();
-        return { id: insertResult.insertId };
+        return
+
 
     } catch (error) {
         await bd.rollback();
@@ -92,4 +74,5 @@ async function insertConsulta(nomeP, cpfP, novaConsulta, nomeMedico, cpfMedico, 
         bd.release();
     }
 }
+
 module.exports = { insertConsulta };

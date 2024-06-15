@@ -7,7 +7,7 @@ async function criarPoolDeConexoes() {
         pool = createPool({
             host: '192.168.4.114',
             port: '3306',
-            database: 'clinica',
+            database: 'newclinica',
             user: 'root',
             password: '1234',
             waitForConnections: true, // Aguarda conexões se não houver disponíveis no momento

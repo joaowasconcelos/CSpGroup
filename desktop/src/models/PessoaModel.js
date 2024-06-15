@@ -20,13 +20,6 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
     try {
         await bd.beginTransaction();
 
-        // const IdTelefone = await bd.query(`SELECT numero FROM tbl_telefone WHERE numero = ? limit 1;`, [telefones[0].numeroTelefone]);
-
-        // if (IdTelefone[0].length > 0) {
-        //     console.log("Telefone já cadastrado na base de dados");
-        //     return `Telefone já cadastrado na base de dados`;
-        // }
-
         const idtel = []
         telefones.forEach(async (tel) => {
             const resTel = await bd.query('INSERT INTO tbl_telefone (numero) VALUES (?)', [tel.numeroTelefone]);
@@ -41,10 +34,10 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
         console.log('ID do Endereço:', enderecoId);
 
         const pessoaResult = await bd.query('INSERT INTO tbl_pessoa (cpf, nome, data_nasc, genero, email, endereco_id) VALUES (?, ?, ?, ?, ?, ?)',
-            [pessoa.cpf, pessoa.nome, pessoa.dataNasc, pessoa.genero, pessoa.email, enderecoId]);
+            [pessoa.cpf, pessoa.nome, pessoa.dataNasc, pessoa.genero, pessoa.email,null, enderecoId]);
         const pessoaId = pessoaResult[0].insertId;
         console.log('ID da Pessoa:', pessoaId);
-
+            
         const idtelHasPessoa = []
         idtel.forEach(async (id) => {
             const resTelPessoa = await bd.query("INSERT INTO tbl_pessoa_has_tbl_telefone(pessoa_id,telefone_id, pessoa_tbl_endereco_id) VALUES (?,?,?)",
