@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Pressable } from 'react-native';
-import {
-    SafeAreaView,
-    ScrollView,
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView,ScrollView,Platform,StyleSheet,Text,View,Image,TextInput} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const logo = require('../../../assets/logo_medical.png');
 import api from '../../service/api';
@@ -20,6 +11,7 @@ const Login = () => {
 
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
+    const [dadosLogin, setDadosLogin] = useState({})
 
     const navigation = useNavigation();
 
@@ -36,32 +28,38 @@ const Login = () => {
                 .then(response => {
                     console.log(response.data);
                     if (response !== undefined && response.data != null) {
-                        const { data: [{id, idlogin}] } = response;
-                        console.log(id, idlogin);
+
+                        const { data } = response.data;
+                        const [firstEntry] = data;
+                        const { id, idLogin, login, senha, tipo } = firstEntry;
+
+                        console.log(id, idLogin, login, senha, tipo);
+                        setDadosLogin({ id: id, idLogin: idLogin, login: login, senha: senha, tipo: tipo });
+                        console.log(dadosLogin);
                     } else {
                         alert('Nenhum registro foi localizado!');
                     }
                 }).catch(error => {
                     console.log('Erro', error);
                 })
-            // .catch(function (error) {
-            //     if (error.response) {
-            //         console.log(error.response.data);
-            //         console.log(error.response.status);
-            //         console.log(error.response.headers);
-            //     } else if (error.request) {
-            //         if ((error.request._response).includes('Failed')) {
-            //             console.log('Erro ao conectar a API.');
-            //         }
-            //     } else {
-            //         console.log('Erro', error.message);
-            //     }
-            //     console.log(error.config);
-            // });
-
-
+            if (dadosLogin.tipo === 'Medico') {
+                navigation.navigate('ConsultasMedico', { dadosLogin })
+            } else {
+                navigation.navigate('ConsultasPaciente', { dadosLogin })
+            }
         } catch (error) {
-
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                if ((error.request._response).includes('Failed')) {
+                    console.log('Erro ao conectar a API.');
+                }
+            } else {
+                console.log('Erro', error.message);
+            }
+            console.log(error.config);
         }
     }
 
