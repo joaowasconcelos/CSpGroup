@@ -1,12 +1,12 @@
-const obterConexaoDoPool = require("../config/db");
+const conectarBancoDeDados = require("../config/db")
 
 async function selectLogin(objLogin) {
-    console.log('HELP =>',objLogin.login, objLogin.senha);
-    const bd = obterConexaoDoPool()
+    console.log('HELP =>', objLogin.login, objLogin.senha);
+    const bd = await conectarBancoDeDados();
     try {
         console.log(objLogin.login, objLogin.senha);
         await bd.beginTransaction();
-        
+
         const selectLogin = await bd.query(`
             SELECT 
                 lo.id,
@@ -21,7 +21,8 @@ async function selectLogin(objLogin) {
             ON lo.pessoa_id=p.id
             WHERE lo.login=? AND lo.senha=?;`, [objLogin.login, objLogin.senha]);
 
-            console.log(selectLogin)
+        const perfilLogin = selectLogin[0][0].tipo
+        return perfilLogin
     }
     catch (error) {
         // if (result.length === 0) {

@@ -2,6 +2,8 @@ const Login = require("../models/classes/Login");
 const { selectLogin, verificarSenha } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
+
+
 const LoginPerfis = {
     paginaLogin: async (req, res) => {
         try {
@@ -23,7 +25,14 @@ const LoginPerfis = {
             const loginConsulta = new Login(null, username, password, null, null, null)
             console.log(loginConsulta)
             const result = await selectLogin(loginConsulta)
-            console.log(result)
+            if (result === "Medico") {
+                console.log(result)
+                console.log("entrou")
+              
+                return res.render('pages/Cadastro'); 
+           
+            }
+
         } catch (error) {
             console.log(error)
             res.json(error);
@@ -48,6 +57,6 @@ const LoginPerfis = {
         console.log(tipo)
         const selecionaTipo = await Perfis.selectTipo(tipo)
         return res.json(selecionaTipo)
-    }
+    },
 }
 module.exports = { LoginPerfis }

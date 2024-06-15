@@ -1,45 +1,48 @@
 {
-    "cpf": "12254789665",
-    "nome": "joaoTeste",
-    "dataNasc": "28/09/2004",
-    "genero": "M",
-    "email": "joao@gmail",
+    "cpf": "50513777857",
+    "nome": "Giovanna",
+    "dataNasc": "01/10/2001",
+    "genero": "F",
+    "email": "giovanna@gmail",
     "endereco": [
         {
-            "logradouro": "Rua: dos corre",
-            "bairro": "Portal Bordon",
+            "logradouro": "teste",
+            "bairro": "teste",
             "estado": "SP",
             "numeroEndereco": "157",
-            "complementoEndereco": "Perto da boca",
+            "complementoEndereco": null,
             "cep": "13173-418"
         }
     ],
     "telefone": [
         {
-            "numeroTelefone": "14770985447"
+            "numeroTelefone": "19885787878"
         }
     ],
     "funcionario": [
         {
-            "dataAdmissao": "14/01/2004",
-            "crm": "0101546"
+            "dataAdmissao": null,
+            "crm": null
         }
     ],
     "Login": [
         {
-            "login": "49914181864",
-            "senha": "7777777777",
+            "login": "50513777857",
+            "senha": "1234",
             "status": "1"
         }
     ],
     "Perfis": [
         {
-            "tipo": "Medico"
+            "tipo": "Paciente"
         }
     ],
-    "Especialidade":[
+    "Especialidade": [
         {
-            "descEspecialidade":"oftalmologista"
+            "descEspecialidade": null
+        },
+        {
+            "descEspecialidade": null
         }
     ]
 }

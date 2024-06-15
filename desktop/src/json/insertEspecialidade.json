@@ -1,6 +1,9 @@
 {
     "Especialidade":[
         {
+            "_descEspecialidade":"cardiologista"
+        },
+				{
             "_descEspecialidade":"oftalmologista"
         }
     ]

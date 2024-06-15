@@ -35,9 +35,6 @@ async function selectInfosPaciente(id) {
     }
 }
 
-
-//SELECT CONSULTAS
-
 async function selectConsultas(id) {
     const bd = await conectarBancoDeDados();
     try {
