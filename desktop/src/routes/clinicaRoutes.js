@@ -40,7 +40,10 @@ router.get ("/Adm",viewAdm.paginaAdm) /*Direciona para a pagina de adm*/
 router.get ("/ConsultaAdm",viewAdm.paginaConsultaAdm) /*Direciona para ver a pagona consulta*/
 router.get ("/Prontuario",viewProntuario.paginaProntuario)
 
-router.get("/Seleciona/Especialidade",selectEspecialidade.selectsEspecialidade)
+router.get ("/Paciente",viewPaciente.paginaPaciente);
+router.get ("/Medico",viewMedico.paginaMedico);
+router.get ("/Adm",viewAdm.paginaAdm);
+router.get("/Seleciona/Especialidade",selectEspecialidade.selectsEspecialidade);
 router.get("/pessoas/infos/:id",viewPaciente.selecionaInfosPaciente);
 router.get("/paciente/consultas/:id", viewPaciente.selecionaConsultas);
 router.get("/Seleciona/Todas/Consultas",selects.selecionaTodasConsultas);
@@ -56,6 +59,4 @@ router.put("/Update/prontuario/:id",cadastroProntuario.UpdateProntuario);
 router.use(function (req, res) {
     res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })
 })
-
 module.exports = router;
-

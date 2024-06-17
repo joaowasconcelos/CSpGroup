@@ -16,8 +16,6 @@ const cadastroConsulta = {
 
 
     },
-
-
     cadastraConsulta: async (req, res) => {
         try {
             const { nome, cpf, nomeMedico, cpfMedico, Consulta: [{ data, hora, status }] } = req.body;

@@ -6,9 +6,9 @@ const cadastroEspecia = {
         try {
             const { Especialidade: especialidadeArray } = req.body;
 
-            console.log("Request Body:", req.body);
-            console.log("Tipo de especialidadeArray:", typeof especialidadeArray);
-            console.log("Conteúdo de especialidadeArray:", especialidadeArray);
+            // console.log("Request Body:", req.body);
+            // console.log("Tipo de especialidadeArray:", typeof especialidadeArray);
+            // console.log("Conteúdo de especialidadeArray:", especialidadeArray);
 
             const objEspecialidade = [];
 
