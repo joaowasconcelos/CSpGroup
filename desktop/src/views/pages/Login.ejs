@@ -23,14 +23,14 @@
             var password = document.getElementById('senha').value;
             var statusDiv = document.getElementById('status');
 
-            fetch('/Login', {
+            fetch('/Login/entrar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: username,
-                    password: password
+                    login: login,
+                    senha: senha
                 })
             })
             .then(response => response.json())
@@ -42,7 +42,7 @@
                     window.location.href = '/';
                 } else {
                     statusDiv.innerHTML = 'falha no login: ' + data.message;
-                }
+                }   
             })
             .catch(error => {
                 console.error('Error:', error);

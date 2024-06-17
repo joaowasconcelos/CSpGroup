@@ -1,5 +1,8 @@
-const { selectInfosPaciente, selectConsultas } = require("../models/PacienteModel")
-const Pessoa = require("../models/classes/Pessoa")
+const { selectInfosPaciente, selectConsultas } = require("../models/PacienteModel");
+const Pessoa = require("../models/classes/Pessoa");
+const Consultas = require("../models/classes/Consulta");
+
+
 
 const viewPaciente = {
 
@@ -15,13 +18,10 @@ const viewPaciente = {
 
     },
 
-
     selecionaInfosPaciente: async (req, res) => {
         try {
-            // const pacienteId = req.params.id; 
-            const {id} = req.body
-            console.log(req.body.id)
-            const pacienteID = req.body.id
+            const {id} = req.params.id
+            const pacienteID = req.params.id
             const novaPessoa = new Pessoa(pacienteID,null,null,null,null,null)
             const infosPaciente = await selectInfosPaciente(novaPessoa.id)
             console.log(infosPaciente[0][0])
@@ -34,9 +34,11 @@ const viewPaciente = {
 
     selecionaConsultas: async (req, res) => {
         try {
-            const id = req.body;
-            const infosConsulta = await selectConsultas(id)
-            return res.json(infosConsulta)
+            const {id} = req.params.id
+            const consultaId = req.params.id
+            const consulta = new Consultas(consultaId,null,null,null,)
+            const infosConsulta = await selectConsultas(consulta.id)
+            return res.json(infosConsulta[0][0])
         } catch (error) {
             console.log(error)
             res.json(error);

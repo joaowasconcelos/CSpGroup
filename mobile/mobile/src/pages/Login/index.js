@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pressable } from 'react-native';
-import {
-    SafeAreaView,
-    ScrollView,
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView,ScrollView,Platform,StyleSheet,Text,View,Image,TextInput} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const logo = require('../../../assets/logo_medical.png');
+import api from '../../service/api';
 
 const Login = () => {
-    
+
+    const [login, setLogin] = useState('');
+    const [senha, setSenha] = useState('');
+    const [dadosLogin, setDadosLogin] = useState({})
+
     const navigation = useNavigation();
 
     const navegaLogin = () => {
@@ -24,30 +20,46 @@ const Login = () => {
         navigation.navigate('Main');
     };
 
-    const getLogin = async (login, senha) => {
+    const getLogin = async () => {
+
         try {
-            const response = await api.get(`/Login/mobileEntrar/${login}`).catch(function (error) {
-                if (error.response) {
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
-                } else if (error.request) {
-                  if ((error.request._response).includes('Failed')) {
-                    console.log('Erro ao conectar a API.');
-                  }
-                } else {
-                  console.log('Erro', error.message);
-                }
-                console.log(error.config);
-              });
-        
-              if (response !== undefined && response.data.length > 0) {
-                setPacienteData(response.data[0]);
-              } else {
-                alert('Nenhum registro foi localizado!');
-              }
+            console.log('oi');
+            await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
+                .then(response => {
+                    console.log(response.data);
+                    if (response !== undefined && response.data != null) {
+
+                        const { data } = response.data;
+                        const [firstEntry] = data;
+                        const { id, idLogin, login, senha, tipo } = firstEntry;
+
+                        console.log(id, idLogin, login, senha, tipo);
+                        setDadosLogin({ id: id, idLogin: idLogin, login: login, senha: senha, tipo: tipo });
+                        console.log(dadosLogin);
+                    } else {
+                        alert('Nenhum registro foi localizado!');
+                    }
+                }).catch(error => {
+                    console.log('Erro', error);
+                })
+            if (dadosLogin.tipo === 'Medico') {
+                navigation.navigate('ConsultasMedico', { dadosLogin })
+            } else {
+                navigation.navigate('ConsultasPaciente', { dadosLogin })
+            }
         } catch (error) {
-            
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                if ((error.request._response).includes('Failed')) {
+                    console.log('Erro ao conectar a API.');
+                }
+            } else {
+                console.log('Erro', error.message);
+            }
+            console.log(error.config);
         }
     }
 
@@ -73,8 +85,20 @@ const Login = () => {
                         <Text style={styles.subtitulo5}>Bem Vindo</Text>
                         <Text style={styles.subtitulo4}>Faça login em sua conta</Text>
 
-                        <TextInput placeholder='Digite seu Email ou C.P.F.' style={styles.entradaTexto}></TextInput>
-                        <TextInput placeholder='Digite sua senha' secureTextEntry={true} style={styles.entradaTexto}></TextInput>
+                        <TextInput
+                            placeholder='Digite seu C.P.F.'
+                            style={styles.entradaTexto}
+                            value={login}
+                            onChangeText={setLogin}>
+                        </TextInput>
+
+                        <TextInput
+                            placeholder='Digite sua senha'
+                            secureTextEntry={true}
+                            style={styles.entradaTexto}
+                            value={senha}
+                            onChangeText={setSenha}>
+                        </TextInput>
 
                         <Text style={styles.subtitulo3}>Esqueceu a senha?</Text>
 
@@ -91,7 +115,7 @@ const Login = () => {
                                     marginBottom: 10
                                 },
                             ]}
-                            onPress={navegaLogin}
+                            onPress={getLogin}
                         >
                             <Text style={{ textAlign: 'center', fontSize: 25, letterSpacing: 5, fontWeight: 'bold', color: '#fafafa' }}>Logar</Text>
                         </Pressable>

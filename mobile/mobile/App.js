@@ -4,9 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Consultas from '../mobile/src/pages/Consultas';
+import ConsultasPaciente from '../mobile/src/pages/ConsultasPaciente';
 import Contato from '../mobile/src/pages/Contato';
-import Dados from '../mobile/src/pages/Dados';
+import DadosPaciente from './src/pages/DadosPaciente';
 import Login from '../mobile/src/pages/Login';
 import ConsultasMedico from './src/pages/ConsultasMedico';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -26,10 +26,10 @@ function MainTabs() {
       }}
     >
       <Tab.Screen
-        name='Consultas'
-        component={Consultas}
+        name='ConsultasPaciente'
+        component={ConsultasPaciente}
         options={{
-          title: 'Consultas',
+          title: 'ConsultasPaciente',
           headerStyle: {
             backgroundColor: '#b4c4bc',
           },
@@ -87,8 +87,8 @@ function LoginStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Dados"
-        component={Dados}
+        name="DadosPaciente"
+        component={DadosPaciente}
         options={{
           title: 'Dados',
           headerTintColor: '#fafafa',

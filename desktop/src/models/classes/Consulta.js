@@ -1,9 +1,10 @@
 class Consulta {
-    constructor(pId, pData, pHora, pStatus) {
+    constructor(pId, pData, pHora, pStatus,pIdp) {
         this.id = pId;
         this.data = pData;
         this.hora = pHora;
         this.status = pStatus;
+        this.ids = pIdp;
     }
 
     get Id() { return this.id; }

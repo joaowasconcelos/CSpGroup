@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TextInput, FlatList, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import api from '../../service/api';
+import { useNavigation, useRoute } from '@react-navigation/native'
 
-const Dados = () => {
-  const [label, setLabel] = useState();
-  const [pacienteData, setPacienteData] = useState({});
-  const [flatListPaciente, setflatListPaciente] = useState([]);
+const DadosPaciente = () => {
+  // const [label, setLabel] = useState();
+  // const [pacienteData, setPacienteData] = useState({});
+  // const [flatListPaciente, setflatListPaciente] = useState([]);
 
-  const logLabel = () => {
-    console.log(label);
-  }
 
   const recebeId = (id) => {
     setLabel(id);
@@ -126,7 +124,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dados;
+export default DadosPaciente;
 
 
 // const styles = StyleSheet.create({
