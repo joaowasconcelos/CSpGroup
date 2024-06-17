@@ -6,26 +6,24 @@ body {
     margin-top: 100px;
 }
 
-
-
 header {
     background: #00665E;
     color: #fff;
-    padding: 20px 0;
+    padding: 15px 0;
     text-align: center;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
-.logo{
+/* .logo{
     margin-top: -10px;
-}
-
-
-
+} */
 
 nav ul {
     list-style: none;
@@ -57,14 +55,9 @@ footer {
 }
 
 .img-01{
-
     margin-left: 850px;
     margin-top: -280px;
-
 }
-
-
-
 
 
 .btn-Login {

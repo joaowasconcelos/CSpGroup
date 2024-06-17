@@ -7,17 +7,14 @@ const {cadastroEspecia, selectEspecialidade, updateEspecialidade} = require("../
 const {cadastroConsulta} = require("../controllers/cadastroConsulta");
 const {cadastroProntuario} = require("../controllers/cadastroProntuario");
 const { viewPaciente } = require("../controllers/pacienteController");
-const { viewMedico }= require("../controllers/MedicoController")
+const { viewMedico }= require("../controllers/MedicoController");
 const { viewAdm} = require("../controllers/AdmController")
+const { viewProntuario} = require("../controllers/ProntuarioController")
 const {selects} = require("../controllers/selectController");
 
 router.get('/', (req, res) => {
-    res.render('index', { title: 'Página Inicial' });
-});
-router.get('/Cadastro', cadastro.paginaCadastro);
-router.get ("/Login",LoginPerfis.paginaLogin);
-router.get('/login/loginTipo', LoginPerfis.selecionaTipo);
-//router.get('/login/loginCef', LoginPerfis.selecionaLogin);
+  res.render('index', { title: 'Página Inicial' });
+ });
 
 router.post("/Cadastro", LoginPerfis.LoginPessoa);
 router.post("/Pessoa/novo",cadastro.adicionaPessoa);
@@ -25,7 +22,23 @@ router.post ("/Cadastro/Especialidade",cadastroEspecia.cadastraEspecialidade)
 router.post ("/Cadastro/Consulta",cadastroConsulta.cadastraConsulta)
 router.post ("/Cadastro/Prontuario/:id",cadastroProntuario.cadastraProntuario)
 router.post("/Login",LoginPerfis.LoginPessoa);
+router.post("/Login/entrar",LoginPerfis.LoginPessoa);
 
+router.get('/Cadastro', cadastro.paginaCadastro);
+router.get ("/Login",LoginPerfis.paginaLogin);
+router.get('/login/loginTipo', LoginPerfis.selecionaTipo);
+router.get('/login/loginCef', LoginPerfis.selecionaLogin);
+router.get('/login/loginTipo', LoginPerfis.selecionaTipo);
+router.get("/paciente/infos",viewPaciente.selecionaInfosPaciente);
+router.get("/paciente/consultas", viewPaciente.selecionaConsultas);
+router.get ("/MedicoAdm", viewAdm.paginaMedicoAdm) /*Direciona para a pagina de vizualiçoes dos medicos*/
+router.get ("/Login",LoginPerfis.paginaLogin) /*Direciona para a pagina de login*/
+router.get ("/Consulta",cadastroConsulta.paginaConsulta) /*Direciona para a pagina de consulta*/
+router.get ("/Paciente",viewPaciente.paginaPaciente) /*Direciona para a pagina de paciente*/
+router.get ("/Medico",viewMedico.paginaMedico) /*Direciona para a pagina de medico*/
+router.get ("/Adm",viewAdm.paginaAdm) /*Direciona para a pagina de adm*/
+router.get ("/ConsultaAdm",viewAdm.paginaConsultaAdm) /*Direciona para ver a pagona consulta*/
+router.get ("/Prontuario",viewProntuario.paginaProntuario)
 
 router.get ("/Paciente",viewPaciente.paginaPaciente);
 router.get ("/Medico",viewMedico.paginaMedico);
@@ -47,24 +60,3 @@ router.use(function (req, res) {
     res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })
 })
 module.exports = router;
-
-
-
-
-// router.get('/Cadastro', cadastro.paginaCadastro);
-
-// router.post("/Cadastro", LoginPerfis.LoginPessoa);
-// router.post("/Pessoa/novo",cadastro.adicionaPessoa);
-// router.post ("/Cadastro/Especialidade",cadastroEspecia.cadastraEspecialidade)
-// router.post ("/Cadastro/Consulta",cadastroConsulta.cadastraConsulta)
-// router.get ("/Login",LoginPerfis.paginaLogin)
-// router.post("/Login/entrar",LoginPerfis.LoginPessoa);
-// router.post("/Login/mobileEntrar",LoginPerfis.LoginPessoaMobile);
-
-// router.get('/login/loginTipo', LoginPerfis.selecionaTipo);
-router.get("/paciente/infos",viewPaciente.selecionaInfosPaciente);
-// router.get ("/Consulta",cadastroConsulta.paginaConsulta) 
-
-// router.get("/paciente/consultas", viewPaciente.selecionaConsultas);
-
-
