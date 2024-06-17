@@ -5,7 +5,7 @@ let pool = null;
 async function criarPoolDeConexoes() {
     if (!pool) {
         pool = createPool({
-            host: '192.168.4.110',
+            host: '192.168.4.114',
             port: '3306',
             database: 'clinica',
             user: 'root',
