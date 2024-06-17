@@ -15,7 +15,7 @@ async function criarProntu(prontuario, idconsulta) {
         const ID_especialidade = ids[0][0].especialidade_id
        console.log(ID_paciente,ID_pacientePessoa,ID_funcionario,ID_funcionarioPessoa,ID_especialidade)
         const [res] = await bd.query(`
-        INSERT INTO tbl_prontuario (diagnostico,medicacao,consulta_id,paciente_id,paciente_pessoa_id,funcionario_id,funcionario_pessoa_id,especialidade_id)
+        INSERT INTO tbl_prontuario (diagnostico,medicacao,consulta_id,consulta_paciente_id,consulta_paciente_pessoa_id,consulta_funcionario_id,consulta_funcionario_pessoa_id,consulta_especialidade_id)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
             [prontuario.diagnostico,prontuario.medicacao,idconsulta.ids,ID_paciente,ID_pacientePessoa,ID_funcionario,ID_funcionarioPessoa,ID_especialidade]);
         await bd.commit();
@@ -28,4 +28,24 @@ async function criarProntu(prontuario, idconsulta) {
     }
 
 }
-module.exports = { criarProntu };
+
+
+async function EditaProntuario(prontuario) {
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const res = await bd.query(
+            `update tbl_prontuario set diagnostico = ?,medicacao = ? where id =?;`,
+            [prontuario.diagnostico,prontuario.medicacao,prontuario.id]);
+            console.log(res)
+        await bd.commit();
+        return res;
+    } catch (error) {
+        console.error('Erro ao editar prontuario:', error);
+        throw error;
+    } finally {
+        await bd.release();
+    }
+
+}
+module.exports = { criarProntu,EditaProntuario };
