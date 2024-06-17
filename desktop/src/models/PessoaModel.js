@@ -14,18 +14,26 @@ async function verificaCpf(pessoa) {
     }
 }
 
+async function verificaEndereco(endereco) {
+    const bd = await conectarBancoDeDados();
+    try {
+        const verificaCep = await bd.query(`SELECT count(cep) as total FROM tbl_endereco where cep =? and numero=?; `, [endereco.cep, endereco.numeroEndereco])
+        console.log(verificaCep)
+        return verificaCep
+    } catch (error) {
+        await bd.rollback();
+        console.log('Erro na transação:', error);
+        return { error: 'Falha na transação', details: error };
+    } finally {
+        bd.release();
+    }
+}
+
 
 async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, perfis, especialidades) {
     const bd = await conectarBancoDeDados();
     try {
         await bd.beginTransaction();
-
-        // const IdTelefone = await bd.query(`SELECT numero FROM tbl_telefone WHERE numero = ? limit 1;`, [telefones[0].numeroTelefone]);
-
-        // if (IdTelefone[0].length > 0) {
-        //     console.log("Telefone já cadastrado na base de dados");
-        //     return `Telefone já cadastrado na base de dados`;
-        // }
 
         const idtel = []
         telefones.forEach(async (tel) => {
@@ -40,7 +48,7 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
         const enderecoId = enderecoResult[0].insertId;
         console.log('ID do Endereço:', enderecoId);
 
-        const pessoaResult = await bd.query('INSERT INTO tbl_pessoa (cpf, nome, data_nasc, genero, email, endereco_id) VALUES (?, ?, ?, ?, ?, ?)',
+        const pessoaResult = await bd.query('INSERT INTO tbl_pessoa (cpf, nome, data_nasc, genero, email,data_cad,endereco_id) VALUES (?, ?, ?, ?, ?, NOW(),?)',
             [pessoa.cpf, pessoa.nome, pessoa.dataNasc, pessoa.genero, pessoa.email, enderecoId]);
         const pessoaId = pessoaResult[0].insertId;
         console.log('ID da Pessoa:', pessoaId);
@@ -73,9 +81,8 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
         console.log('ID do Perfil:', perfisId);
 
 
-        if (pacienteFuncionario !== null) {
-            const IdEspecialidade = await bd.query(`SELECT id FROM tbl_especialidade WHERE desc_especialidade = ? limit 1;`, [especialidades._descEspecialidade]);
-         
+        if (pacienteFuncionario !== null && pacienteFuncionario.crm != null) {
+            const IdEspecialidade = await bd.query(`SELECT id FROM tbl_especialidade WHERE desc_especialidade = ?;`, [especialidades.descEspecialidade]);
             const IdEspecialidades = IdEspecialidade[0][0].id;
             console.log("ID da Especialidade", IdEspecialidade[0][0].id)
 
@@ -90,15 +97,53 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
             });
         }
 
-            await bd.commit();
-        }
-        catch (error) {
-            await bd.rollback();
-            console.log('Erro na transação:', error);
-            return { error: 'Falha na transação', details: error };
-        } finally {
-            bd.release();
-        }
+        await bd.commit();
     }
+    catch (error) {
+        await bd.rollback();
+        console.log('Erro na transação:', error);
+        return { error: 'Falha na transação', details: error };
+    } finally {
+        bd.release();
+    }
+}
 
-    module.exports = { insert, verificaCpf };
+async function updateTel(tel){
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const UpdateTelefone = await bd.query('update tbl_telefone set numero = ? where id =?;',
+            [tel.numeroTelefone,tel.id]
+        );
+        console.log(UpdateTelefone)
+        return UpdateTelefone;
+        await bd.commit();
+    } catch (error) {
+        await bd.rollback();
+        console.log('Erro na transação:', error);
+        return { error: 'Falha na transação', details: error };
+    } finally {
+        bd.release();
+    }
+}
+
+async function updateEndereco(endere){
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const UpdateEnderecos = await bd.query('update tbl_endereco set logradouro = ?,bairro = ?,estado = ?, numero = ?, complemento=?, cep=? where id =?;',
+            [endere.logradouro,endere.bairro,endere.estado,endere.numeroEndereco,endere.complementoEndereco,endere.cep,endere.id]
+        );
+        console.log(UpdateEnderecos)
+        return UpdateEnderecos;
+        await bd.commit();
+    } catch (error) {
+        await bd.rollback();
+        console.log('Erro na transação:', error);
+        return { error: 'Falha na transação', details: error };
+    } finally {
+        bd.release();
+    }
+}
+
+module.exports = { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco };

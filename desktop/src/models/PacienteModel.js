@@ -5,38 +5,51 @@ async function selectInfosPaciente(id) {
     const bd = await conectarBancoDeDados();
     try {
         const selectInfosPaciente = await bd.query(`
-          SELECT 
-   p.nome AS Nome,
+         SELECT 
+    p.nome AS Nome,
     p.cpf AS CPF,
     p.data_nasc AS DataNascimento,
     p.genero AS Genero,
     p.email AS Email,
+    p.data_cad AS DataCadastro,
     e.logradouro AS Logradouro,
     e.bairro AS Bairro,
     e.estado AS Estado,
     e.numero AS NumeroResidencia,
     e.complemento AS Complemento,
     e.cep AS CEP,
-    t.numero AS Telefone
-    
-    FROM
-        tbl_pessoa p
-    INNER JOIN 
-        tbl_pessoa_has_tbl_telefone pt ON p.id = pt.pessoa_id
-    INNER JOIN 
-        tbl_telefone t ON pt.telefone_id = t.id
-    INNER JOIN 
-        tbl_endereco e ON pt.pessoa_tbl_endereco_id = e.id
-    WHERE 
+    t.numero AS Telefone,
+    pf.tipo as Tipo,
+    lg.login as Login,
+    lg.senha as Senha,
+    f.data_admissao as DataAdmissao,
+    f.crm AS CRM,
+    es.desc_especialidade as Especialidade
+FROM
+    tbl_pessoa p
+LEFT JOIN 
+    tbl_pessoa_has_tbl_telefone pt ON p.id = pt.pessoa_id
+LEFT JOIN 
+    tbl_telefone t ON pt.telefone_id = t.id
+LEFT JOIN 
+    tbl_endereco e ON p.endereco_id = e.id
+LEFT JOIN 
+    tbl_perfis pf ON pf.login_pessoa_id = p.id
+LEFT JOIN 
+    tbl_login lg ON lg.pessoa_id = p.id AND lg.pessoa_endereco_id = p.endereco_id
+LEFT JOIN 
+    tbl_funcionario f ON f.pessoa_id = p.id AND f.pessoa_endereco_id = p.endereco_id
+LEFT JOIN 
+        tbl_funcionario_has_tbl_especialidade fe ON f.id = fe.funcionario_id
+LEFT JOIN 
+        tbl_especialidade es ON fe.especialidade_id = es.id
+WHERE 
     p.id = ?; `, [id]);
         return selectInfosPaciente
     } catch (error) {
         throw error;
     }
 }
-
-
-//SELECT CONSULTAS
 
 async function selectConsultas(id) {
     const bd = await conectarBancoDeDados();
