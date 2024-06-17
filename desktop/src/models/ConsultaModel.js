@@ -75,4 +75,25 @@ async function insertConsulta(novoPaciente, novaConsulta, novoMedico, novoProntu
     }
 }
 
-module.exports = { insertConsulta };
+async function updateConsul(consultas) {
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        console.log(consultas)
+        const UpConsultas = await bd.query('update tbl_consulta set data = ?,hora = ?,status = ? where id =?;',
+            [consultas.data,consultas.hora,consultas.status,consultas.id]
+        );
+        await bd.commit();
+        return UpConsultas
+    } catch (error) {
+        await bd.rollback();
+        console.log('Erro na transação:', error);
+        return { error: 'Falha na transação', details: error };
+    } finally {
+        bd.release();
+    }
+
+}
+
+
+module.exports = { insertConsulta,updateConsul };
