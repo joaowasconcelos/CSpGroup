@@ -76,6 +76,7 @@ const LoginPerfis = {
             res.json(error);
         }
     },
+    
     // selecionaLogin: async (req, res) => {
     //     try {
     //         console.log(req.body)
@@ -87,6 +88,7 @@ const LoginPerfis = {
     //         res.json(error);
     //     }
     // },
+
     selecionaTipo: async (req, res) => {
 
         const { perfis: [{ tipo }] } = req.body

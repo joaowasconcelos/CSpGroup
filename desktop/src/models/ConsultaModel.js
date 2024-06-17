@@ -24,7 +24,7 @@ async function insertConsulta(novoPaciente, novaConsulta, novoMedico, novoProntu
         const pacienteId = pacienteResult[0].id;
         console.log('ID do Paciente:', pacienteId);
         const [funcionarioResult] = await bd.query(
-            `SELECT id FROM tbl_funcionario WHERE pessoa_id = (SELECT id FROM tbl_pessoa WHERE nome = ? AND cpf = ? limit 1);`,
+            `SELECT id FROM tbl_funcionario WHERE pessoa_id = (SELECT id FROM tbl_pessoa WHERE nome = ? AND cpf = ?);`,
             [novoMedico.nome, novoMedico.cpf]
 
         );
