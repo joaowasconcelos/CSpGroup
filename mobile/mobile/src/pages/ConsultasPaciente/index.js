@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import api from '../../service/api';
 
-const Consultas = () => {
+const ConsultasPaciente = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -124,7 +124,7 @@ const Consultas = () => {
   );
 }
 
-export default Consultas;
+export default ConsultasPaciente;
 
 const styles = StyleSheet.create({
   androidSafeArea: {

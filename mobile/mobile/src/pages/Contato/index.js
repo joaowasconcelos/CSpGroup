@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Image } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const contato = require('../../../assets/contact.png');
 

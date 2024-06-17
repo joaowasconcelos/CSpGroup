@@ -1,18 +1,18 @@
 const Especialidade = require("../models/classes/Especialidade");
-const { insertEspecialidade } = require("../models/EspecialidadeModel");
+const { insertEspecialidade, selectEspecialidades,UpdateEspecialidade } = require("../models/EspecialidadeModel");
 
 const cadastroEspecia = {
     cadastraEspecialidade: async (req, res) => {
         try {
             const { Especialidade: especialidadeArray } = req.body;
-            
+
             console.log("Request Body:", req.body);
             console.log("Tipo de especialidadeArray:", typeof especialidadeArray);
             console.log("Conteúdo de especialidadeArray:", especialidadeArray);
 
             const objEspecialidade = [];
 
-           
+
             if (Array.isArray(especialidadeArray) && especialidadeArray.length > 0) {
                 especialidadeArray.forEach(descEspec => {
                     if (descEspec._descEspecialidade) {
@@ -38,4 +38,32 @@ const cadastroEspecia = {
     }
 };
 
-module.exports = { cadastroEspecia };
+const selectEspecialidade = {
+    selectsEspecialidade: async (req, res) => {
+        try {
+            result = await selectEspecialidades()
+            return res.json(result[0][0])
+        } catch (error) {
+            console.error("Erro ao cadastrar especialidades:", error);
+            res.status(500).json({ error: "Erro ao cadastrar especialidades" });
+        }
+    }
+}
+
+const updateEspecialidade = {
+    updateEspec: async (req, res) => {
+        try {
+            const {especialidades} = req.body;
+            const EspId = req.params.id
+            const updateEspeciali = new Especialidade(EspId,especialidades)
+            console.log(updateEspeciali)
+            result = await UpdateEspecialidade(updateEspeciali)
+            return res.json({message: "Especialidade atualizada"})
+        } catch (error) {   
+            console.error("Erro ao cadastrar especialidades:", error);
+            res.status(500).json({ error: "Erro ao cadastrar especialidades" });
+        }
+    }
+}
+
+module.exports = { cadastroEspecia, selectEspecialidade,updateEspecialidade };
